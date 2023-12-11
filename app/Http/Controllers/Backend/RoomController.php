@@ -12,9 +12,9 @@ class RoomController extends Controller
         return view('backend.category');
     }
 
-    public function submitcategory(Request $req)
+    public function submitcategory(Request $request)
     {
-        $req->validate([
+        $request->validate([
             'roomtype' =>'required'
         ],
     [
@@ -22,11 +22,11 @@ class RoomController extends Controller
     ]);
 
         $category = new Category();
-        $category->name = $req->roomtype;
+        $category->name = $request->roomtype;
         $category->save();
         return redirect()->back();
     }
-    public function roomsubmit(Request $req){
-        dd($req->all());
+    public function roomsubmit(Request $request){
+        dd($request->all());
     }
 }
