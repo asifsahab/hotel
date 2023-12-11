@@ -122,6 +122,12 @@
                 </a>
               </li>
               <li class="nav-item">
+                <a href="{{route('roomcategory')}}" class="nav-link">
+
+                  <p>Room Category</p>
+                </a>
+              </li>
+              <li class="nav-item">
                 <a href="{{route('city')}}" class="nav-link {{ Route::is('city*')? 'active' : '' }}">
 
                   <p>City</p>

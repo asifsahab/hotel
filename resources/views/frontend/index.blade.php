@@ -87,22 +87,21 @@
                                 </div>
                             </div>
                             <div class="row">
-
-
-                                <div class=" col-md-4 mt-2">
-                                    <div class="date" id="date1" data-target-input="nearest">
-                                        <input type="text" class="form-control datetimepicker-input"
-                                            placeholder="Check in" data-target="#date1" data-toggle="datetimepicker" />
+                                <div class="col-md-4 mt-2">
+                                    <div class="date">
+                                        <input type="date" class="form-control" placeholder="Check In" />
                                     </div>
+                                    <small class="text-muted">Check-In</small>
                                 </div>
 
                                 <div class="col-md-4 mt-2">
-                                    <div class="date" id="date2" data-target-input="nearest">
-                                        <input type="text" class="form-control datetimepicker-input" placeholder="Check out" data-target="#date2" data-toggle="datetimepicker"/>
+                                    <div class="date">
+                                        <input type="date" class="form-control" placeholder="Check Out" />
                                     </div>
+                                    <small class="text-muted">Check-Out</small>
                                 </div>
-
                             </div>
+
                         </div>
                         <div class="col-md-2 ">
                             <button class="btn btn-primary w-100 mt-5 rounded-pill"><i class="fas fa-check"></i> &nbsp;Availabilty</button>
