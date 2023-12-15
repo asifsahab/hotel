@@ -104,7 +104,7 @@
 
                         </div>
                         <div class="col-md-2 ">
-                            <button class="btn btn-primary w-100 mt-5 rounded-pill"><i class="fas fa-check"></i> &nbsp;Availabilty</button>
+                            <button class="btn btn-primary w-100 mt-5 rounded-pill"><i class="fas fa-search"></i> &nbsp;Search</button>
                         </div>
                     </div>
                 </div>

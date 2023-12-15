@@ -118,7 +118,7 @@
               <li class="nav-item">
                 <a href="{{route('roomregister')}}" class="nav-link">
 
-                  <p>Room</p>
+                  <p>Room Registration</p>
                 </a>
               </li>
               <li class="nav-item">
@@ -131,12 +131,6 @@
                 <a href="{{route('city')}}" class="nav-link {{ Route::is('city*')? 'active' : '' }}">
 
                   <p>City</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="{{route('roomregister')}}" class="nav-link">
-
-                  <p>Person</p>
                 </a>
               </li>
               <li class="nav-item">
@@ -155,12 +149,6 @@
                 <a href="{{route('roomregister')}}" class="nav-link">
 
                   <p>User Registers</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="{{route('roomregister')}}" class="nav-link">
-
-                  <p>Checking Dates</p>
                 </a>
               </li>
 

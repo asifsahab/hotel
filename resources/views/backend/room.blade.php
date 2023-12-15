@@ -13,7 +13,7 @@
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="#">Room</a></li>
+                            <li class="breadcrumb-item"><a href="{{route('roomregister')}}">Room</a></li>
                             <li class="breadcrumb-item active">Dashboard</li>
                         </ol>
                     </div><!-- /.col -->
@@ -29,7 +29,7 @@
                 </div>
                 <!-- /.card-header -->
                 <!-- form start -->
-                <form action="{{route('submitroom')}}" method="POST">
+                <form action="{{ route('submitroom') }}" method="POST">
                     @csrf
                     <div class="card-body">
                         <div class="form-group">
@@ -54,21 +54,35 @@
                                 @endif
                             </select>
                         </div>
-                        <div class="form-group">
-                            <label for="hotelname">Hotel Name</label>
-                            <input type="text" name="hotelname" class="form-control" id="hotelname" placeholder="Hotel Name">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="hotelname">Hotel Name</label>
+                                    <input type="text" name="hotelname" class="form-control" id="hotelname"
+                                        placeholder="Hotel Name">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="price">Room Price</label>
+                                    <input type="number" name="price" class="form-control" id="price"
+                                        placeholder="Enter Room Price">
+                                </div>
+                            </div>
                         </div>
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="room">Room</label>
-                                    <input type="number" name="room" class="form-control" id="room" placeholder="Enter Room">
+                                    <label for="room">No. of Rooms</label>
+                                    <input type="number" name="room" class="form-control" id="room"
+                                        placeholder="Enter Room">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="person">Person Capacity</label>
-                                    <input type="number" name="person"class="form-control" id="person" placeholder="Enter Person">
+                                    <input type="number" name="person"class="form-control" id="person"
+                                        placeholder="Enter Person">
                                 </div>
                             </div>
                         </div>
@@ -85,15 +99,23 @@
                                 <div class="from-group">
                                     <div class="date">
                                         <label for="checkout">Availability Check Out</label>
-                                        <input type="date" name="checkout" class="form-control" placeholder="Check Out" />
+                                        <input type="date" name="checkout" class="form-control"
+                                            placeholder="Check Out" />
                                     </div>
                                 </div>
                             </div>
                         </div>
+
+                        <div class="form-group">
+                            <label for="address">Hotel Address:</label>
+                            <textarea class="form-control" name="address" cols="10" rows="2" placeholder="Address of your Place..."></textarea>
+                        </div>
+
                         <div class="form-group">
                             <label for="room">Description:</label>
-                            <textarea name="" class="form-control" name="description" cols="10" rows="3"></textarea>
+                            <textarea class="form-control" name="description" cols="10" rows="3" placeholder="Information of Accomodation..."></textarea>
                         </div>
+
                         <div class="form-group">
                             <label for="exampleInputFile">File input</label>
                             <div class="input-group">
@@ -101,9 +123,7 @@
                                     <input type="file" class="custom-file-input" name="image" id="exampleInputFile">
                                     <label class="custom-file-label" for="exampleInputFile">Choose file</label>
                                 </div>
-                                <div class="input-group-append">
-                                    <span class="input-group-text" id="">Upload</span>
-                                </div>
+
                             </div>
                         </div>
                     </div>

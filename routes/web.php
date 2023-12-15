@@ -43,5 +43,5 @@ Auth::routes();
 Route::get('/admin/home', [IndexController::class, 'admin'])->name('home');
 Route::post('/city/submit', [CityController::class, 'submit'])->name('citysubmit');
 Route::get('/room/category', [RoomController::class, 'index'])->name('roomcategory');
-Route::post('/room/submit', [RoomController::class, 'submitcategory'])->name('categorysubmit');
+Route::post('/room/category/submit', [RoomController::class, 'submitcategory'])->name('categorysubmit');
 Route::post('/roomsubmit', [RoomController::class, 'roomsubmit'])->name('submitroom');
