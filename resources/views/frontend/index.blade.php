@@ -106,7 +106,6 @@
                                         </div>
                                         <small class="text-muted">Check-Out</small>
                                     </div>
-                                    
                                 </div>
 
                             </div>
