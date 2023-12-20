@@ -26,7 +26,9 @@ class RoomController extends Controller
         $category->save();
         return redirect()->back();
     }
+
     public function roomsubmit(Request $request){
         dd($request->all());
     }
+
 }
