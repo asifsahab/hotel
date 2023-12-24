@@ -33,16 +33,26 @@ Route::get('/team',[HomeController::class,'team'])->name('team');
 Route::get('/testimonial',[HomeController::class,'testimonial'])->name('testimonial');
 
 
-
-Route::get('/roomregister',[IndexController::class,'roomregister'])->name('roomregister');
 Route::get('/city',[IndexController::class,'city'])->name('city');
+Route::post('/city/submit', [CityController::class, 'submit'])->name('citysubmit');
+Route::get('/city/data', [CityController::class,'cityData'])->name('citydata');
+Route::get('/city/delete/{id}', [CityController::class,'cityDelete'])->name('citydelete');
 
 
 Auth::routes();
 
 Route::get('/admin/home', [IndexController::class, 'admin'])->name('home');
-Route::post('/city/submit', [CityController::class, 'submit'])->name('citysubmit');
-Route::get('/room/category', [RoomController::class, 'index'])->name('roomcategory');
+
+Route::get('/room/category', [RoomController::class, 'category'])->name('roomcategory');
 Route::post('/room/category/submit', [RoomController::class, 'submitcategory'])->name('categorysubmit');
+Route::get('/category/data', [RoomController::class,'categoryData'])->name('categorydata');
+Route::get('/category/delete/{id}', [RoomController::class,'categoryDelete'])->name('categorydelete');
+
+
+Route::get('/roomregister',[IndexController::class,'roomregister'])->name('roomregister');
 Route::post('/roomsubmit', [RoomController::class, 'roomsubmit'])->name('submitroom');
+Route::get('/roomregister/data', [RoomController::class,'registerData'])->name('registerdata');
+Route::get('/room/delete/{id}', [RoomController::class,'roomDelete'])->name('roomdelete');
+
+Route::post('/sreach', [RoomController::class, 'search'])->name('search');
 

@@ -70,16 +70,18 @@
             <div class="container-fluid booking pb-5 wow fadeIn" data-wow-delay="0.1s">
                 <div class="container">
                     <div class="bg-white shadow " style="padding: 35px;">
+                        <form action="{{route('search')}}" method="POST">
+                            @csrf
                         <div class="row g-2">
                             <div class="col-md-10 ">
                                 <div class="row g-2">
 
                                     <div class="col-md-4">
-                                        <select class="form-select">
-                                            <option selected disabled>Select Destination</option>
+                                        <select name="city" class="form-select">
+                                            <option selected disabled >Select Destination</option>
                                             @if (isset($city))
                                                 @foreach ($city as $cityname)
-                                                    <option value="{{ $cityname->id }}">{{ $cityname->city }}</option>
+                                                    <option  value="{{ $cityname->id }}">{{ $cityname->city }}</option>
                                                 @endforeach
                                             @endif
                                         </select>
@@ -89,20 +91,20 @@
                                             name="persons">
                                     </div>
                                     <div class="col-md-4">
-                                        <input type="number" id="quantity" class="form-control" placeholder="Enter Room">
+                                        <input type="number" name="enterroom" id="quantity" class="form-control" placeholder="Enter Room">
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-4 mt-2">
                                         <div class="date">
-                                            <input type="date" class="form-control" placeholder="Check In" />
+                                            <input type="date" name="checkin" class="form-control" placeholder="Check In" />
                                         </div>
                                         <small class="text-muted">Check-In</small>
                                     </div>
 
                                     <div class="col-md-4 mt-2">
                                         <div class="date">
-                                            <input type="date" class="form-control" placeholder="Check Out" />
+                                            <input type="date" name="checkout" class="form-control" placeholder="Check Out" />
                                         </div>
                                         <small class="text-muted">Check-Out</small>
                                     </div>
@@ -110,9 +112,10 @@
 
                             </div>
                             <div class="col-md-2 ">
-                                <button class="btn btn-primary w-100 mt-5 rounded-pill"><i class="fas fa-search"></i>
+                                <button type="submit" class="btn btn-primary w-100 mt-5 rounded-pill"><i class="fas fa-search"></i>
                                     &nbsp;Search</button>
                             </div>
+                        </form>
                         </div>
                     </div>
                 </div>

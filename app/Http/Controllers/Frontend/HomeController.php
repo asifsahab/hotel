@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\City;
 use App\Models\Area;
+use App\Models\room;
 
 class HomeController extends Controller
 {
@@ -27,7 +28,9 @@ class HomeController extends Controller
         return view('frontend.contact');
     }
     public function room(){
-        return view('frontend.room');
+        $room = Room::all();
+        return view('frontend.room')
+        ->with('room', $room);
     }
     public function service(){
         return view('frontend.service');

@@ -10,13 +10,24 @@
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="{{ route('roomcategory') }}">Room Category</a></li>
-                            <li class="breadcrumb-item active">Dashboard</li>
+                            <li class="breadcrumb-item"><a href="{{ route('categorydata') }}"><h5><b>View Categories</b></h5></a>
+                            </li>
                         </ol>
                     </div><!-- /.col -->
                 </div><!-- /.row -->
             </div><!-- /.container-fluid -->
         </div>
+
+        @if (session('success'))
+            <div id="alertSuccess" class="alert alert-success alert-dismissible fade show text-center" role="alert">
+                <strong>{{ session('success') }}</strong>
+            </div>
+            <script>
+                setTimeout(function() {
+                    $('#alertSuccess').alert('close');
+                }, 5000);
+            </script>
+        @endif
 
         <div class="offset-3 col-md-6">
             <!-- general form elements -->
