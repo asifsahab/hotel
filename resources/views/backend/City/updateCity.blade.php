@@ -6,11 +6,13 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0 text-dark">Dashboard</h1>
+                        <h1 class="m-0 text-dark">Destination</h1>
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="{{ route('categorydata') }}"><h5><b>View Categories</b></h5></a>
+                            <li class="breadcrumb-item"><a href="{{ route('citydata') }}">
+                                    <h5><b>Go Back</b></h5>
+                                </a>
                             </li>
                         </ol>
                     </div><!-- /.col -->
@@ -18,13 +20,13 @@
             </div><!-- /.container-fluid -->
         </div>
 
-        @if (session('success'))
-            <div id="alertSuccess" class="alert alert-primary alert-dismissible fade show text-center" role="alert">
-                <strong>{{ session('success') }}</strong>
+        @if (session('msg'))
+            <div id="alertMsg" class="alert alert-danger alert-dismissible fade show text-center" role="alert">
+                <strong>{{ session('msg') }}</strong>
             </div>
             <script>
                 setTimeout(function() {
-                    $('#alertSuccess').alert('close');
+                    $('#alertMsg').alert('close');
                 }, 5000);
             </script>
         @endif
@@ -33,32 +35,28 @@
             <!-- general form elements -->
             <div class="card card-primary">
                 <div class="card-header">
-                    <h3 class="card-title">
-                        Room Category Registration</h3>
+                    <h3 class="card-title">Update Your Data</h3>
                 </div>
                 <!-- /.card-header -->
                 <!-- form start -->
-
-                <div class="card-body">
-                    <form action="{{ route('categorysubmit') }}" method="POST">
-                        @csrf
+                <form method="POST" action="{{ route('updated', $data->id) }}">
+                    @csrf
+                    <div class="card-body">
                         <div class="form-group">
-                            <label for="exampleInputEmail1">Enter Room Type:</label>
-                            <input type="text" name="roomtype" placeholder="Appartment,PentHouse,Villa......"
-                                class="form-control @error('roomtype') is-invalid @enderror">
+                            <label for="exampleInputEmail1">Update city</label>
+                            <input type="text" value="{{ $data->city }}" name="city" class="form-control" id="exampleInputEmail1">
                             <span class="text-danger">
-                                @error('roomtype')
+                                @error('city')
                                     {{ $message }}
                                 @enderror
                             </span>
                         </div>
+                    </div>
+                    <!-- /.card-body -->
 
-                </div>
-                <!-- /.card-body -->
-
-                <div class="card-footer">
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                </div>
+                    <div class="card-footer">
+                        <button type="submit" class="btn btn-primary">Update</button>
+                    </div>
                 </form>
             </div>
             <!-- /.card -->

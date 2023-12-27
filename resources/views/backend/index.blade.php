@@ -34,7 +34,7 @@
                 <p>New Bookings</p>
               </div>
               <div class="icon">
-                <i class="ion ion-bag"></i>
+                <i class="fas fa-calendar-plus"></i>
               </div>
               <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
@@ -44,14 +44,14 @@
             <!-- small box -->
             <div class="small-box bg-success">
               <div class="inner">
-                <h3>153<sup style="font-size: 20px"></sup></h3>
+                <h3>{{$room}}<sup style="font-size: 20px"></sup></h3>
 
-                <p>Rooms</p>
+                <p>Total Rooms</p>
               </div>
               <div class="icon">
-                <i class="ion ion-stats-bars"></i>
+                <i class="fas fa-bed"></i>
               </div>
-              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              <a href="{{route('registerdata')}}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
           <!-- ./col -->
@@ -59,14 +59,14 @@
             <!-- small box -->
             <div class="small-box bg-warning">
               <div class="inner">
-                <h3>44</h3>
+                <h3>{{$city}}</h3>
 
-                <p>User Registrations</p>
+                <p>City</p>
               </div>
               <div class="icon">
-                <i class="ion ion-person-add"></i>
+                <i class="fas fa-map"></i>
               </div>
-              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              <a href="{{route('citydata')}}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
           <!-- ./col -->

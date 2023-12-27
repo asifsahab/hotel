@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\City;
 use App\Models\Area;
-use App\Models\room;
+use App\Models\Room;
 
 class HomeController extends Controller
 {
@@ -17,6 +17,7 @@ class HomeController extends Controller
         ->with('city',$city);
 
     }
+    
 
     public function about(){
         return view('frontend.about');

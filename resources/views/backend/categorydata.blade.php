@@ -1,24 +1,26 @@
 @extends('backend.Layouts.main')
 @section('main-section')
     <div class="content-wrapper">
+        <section class="content-header">
         <!-- Content Header (Page header) -->
-        <div class="content-header">
+
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0 text-dark">All Categories Data</h1>
-                    </div><!-- /.col -->
+                        <h1>Category</h1>
+                    </div>
+                    <!-- /.col -->
                     <div class="col-sm-6">
-                        <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="{{ route('roomcategory') }}">
-                                    <h5><b>Go Back</b></h5>
-                                </a>
-                            </li>
-                        </ol>
-                    </div><!-- /.col -->
-                </div><!-- /.row -->
-            </div><!-- /.container-fluid -->
-        </div>
+<div class="d-flex justify-content-between align-items-center">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{{route('home')}}">Home</a></li>
+        <li class="breadcrumb-item active"><a href="{{route('categorydata')}}">Category</a></li>
+    </ol>
+
+    <a href="{{route('roomcategory')}}" class="btn btn-info">Add Category</a>
+</div></div>
+</div>
+</section>
 
         @if (session('msg'))
             <div id="alertMsg" class="alert alert-danger alert-dismissible fade show text-center" role="alert">
@@ -32,7 +34,7 @@
         @endif
 
         @if (session('success'))
-            <div id="alertSuccess" class="alert alert-success alert-dismissible fade show text-center" role="alert">
+            <div id="alertSuccess" class="alert alert-primary alert-dismissible fade show text-center" role="alert">
                 <strong>{{ session('success') }}</strong>
             </div>
             <script>
@@ -42,29 +44,53 @@
             </script>
         @endif
 
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header bg-primary">
+                                <h3 class="card-title ">
+                                    <i class="fas fa-bed"></i>&nbsp;Category Table
+                                </h3>
+                                <div class="card-tools">
+                                    <form action="{{route('registerdata')}}" method="get" >
+                                        @csrf
+                                        <div class="input-group input-group-sm" style="width: 150px;">
+                                <input type="text" name="search" placeholder="Search by Category....." class="form-control float-right">
+                                <div class="input-group-append">
+                                    <button type="submit" class="btn btn-secondary"><i class="fas fa-search"></i></button>
+                                </div>
+                            </div>
+                            </form>
+                                </div>
+                            </div>
 
-        <div class="container">
-            <div style="text-align: center" class="row">
-                <div class="offset-3 col-md-6">
-                    <table class="table table-bordered table-striped" style="color: blue">
-                        <tr>
-                            <th>Category</th>
-                            <th>Delete</th>
-                            <th>Edit</th>
+                            <div class="card-body table-responsive p-0">
+
+                                <table class="table table-hover text-nowrap">
+                                    <thead>
+                                    <tr>
+                            <th class="text-center">Category</th>
+                            <th class="text-center">Action</th>
                         </tr>
                         @foreach ($data as $id => $category)
                             <tr>
-                                <td> {{ $category->name }} </td>
-                                <td> <a href="{{ route('categorydelete', $category->id) }}"
-                                        class="btn btn-danger btn-sm">Delete </a></td>
-                                <td> <a href="" class="btn btn-primary btn-sm">Edit</a></td>
-                            </tr>
-                        @endforeach
-                    </table>
-                </div>
-            </div>
-        </div>
+                                <td class="text-center"> {{ $category->name }} </td>
+                                <td class="text-center"> <a href="{{ route('categorydelete', $category->id) }}"
+                                        class="btn btn-danger btn-sm">Delete </a>
+                                        <a href="{{ route('categoryupdate', $category->id)}}" class="btn btn-primary btn-sm">Edit</a></td>
+                                    </tr>
+                                    @endforeach
+                                </tbody>
 
-    </div>
-    </div>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                </div>
+            </section>
+            </div></div>
 @endsection

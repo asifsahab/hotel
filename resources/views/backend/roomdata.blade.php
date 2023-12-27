@@ -1,26 +1,27 @@
 @extends('backend.Layouts.main')
 @section('main-section')
     <div class="content-wrapper">
+        <section class="content-header">
         <!-- Content Header (Page header) -->
-        <div class="content-header">
+
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0 text-dark">All Rooms Data</h1>
-                    </div><!-- /.col -->
+                        <h1>Room</h1>
+                    </div>
+                    <!-- /.col -->
                     <div class="col-sm-6">
-                        <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="{{ route('roomregister') }}">
-                                    <h5><b>Go Back</b></h5>
-                                </a>
-                            </li>
-                        </ol>
-                    </div><!-- /.col -->
-                </div><!-- /.row -->
-            </div><!-- /.container-fluid -->
-        </div>
+<div class="d-flex justify-content-between align-items-center">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{{route('home')}}">Home</a></li>
+        <li class="breadcrumb-item active"><a href="{{route('registerdata')}}">Room</a></li>
+    </ol>
 
-        @if (session('msg'))
+    <a href="{{route('roomregister')}}" class="btn btn-info">Add Room</a>
+</div></div>
+</div>
+</section>
+@if (session('msg'))
             <div id="alertMsg" class="alert alert-danger alert-dismissible fade show text-center" role="alert">
                 <strong>{{ session('msg') }}</strong>
             </div>
@@ -30,52 +31,82 @@
                 }, 5000);
             </script>
         @endif
-
         @if (session('success'))
-            <div id="alertSuccess" class="alert alert-success alert-dismissible fade show text-center" role="alert">
-                <strong>{{ session('success') }}</strong>
-            </div>
-            <script>
-                setTimeout(function() {
-                    $('#alertSuccess').alert('close');
-                }, 5000);
-            </script>
-        @endif
+        <div id="alertSuccess" class="alert alert-primary alert-dismissible fade show text-center" role="alert">
+            <strong>{{ session('success') }}</strong>
+        </div>
+        <script>
+            setTimeout(function() {
+                $('#alertSuccess').alert('close');
+            }, 5000);
+        </script>
+    @endif
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header bg-primary">
+                        <h3 class="card-title ">
+                            <i class="fas fa-bed"></i>&nbsp;Room Table
+                        </h3>
+                        <div class="card-tools">
+                            <form action="{{route('registerdata')}}" method="get" >
+                                @csrf
+                                <div class="input-group input-group-sm" style="width: 150px;">
+                        <input type="text" name="search" placeholder="Search by Room....." class="form-control float-right">
+                        <div class="input-group-append">
+                            <button type="submit" class="btn btn-secondary"><i class="fas fa-search"></i></button>
+                        </div>
+                    </div>
+                    </form>
+                        </div>
+                    </div>
 
 
-        <div class="container">
-            <div style="text-align: center" class="row">
-                <div class="col-md-12">
-                    <table class="table table-bordered table-striped" style="color: blue">
-                        <tr style="color: black">
-                            <th>Hotel Name</th>
-                            <th>Price</th>
-                            <th>Room</th>
-                            <th>Person</th>
-                            <th>Check-in</th>
-                            <th>Check-out</th>
-                            <th>Address</th>
-                            <th>Description</th>
-                            <th>Image</th>
-                            <th>Delete</th>
-                            <th>Edit</th>
+        <div class="card-body table-responsive p-0">
+
+                    <table class="table table-hover text-nowrap">
+                        <thead>
+                        <tr>
+                            <th class="text-center">City</th>
+                            <th class="text-center">Room Category</th>
+                            <th class="text-center">Room Title</th>
+
+                            <th class="text-center">Detail</th>
+
+                            <th class="text-center">Time</th>
+                            <th class="text-center">Address</th>
+                            <th class="text-center">Description</th>
+                            <th class="text-center">Image</th>
+                            <th class="text-center">Action</th>
+
                         </tr>
-                        @foreach ($data as $id => $room)
+                    </thead>
+                    <tbody>
+                                                @foreach ($data as $room)
                             <tr>
-                                <td> {{ $room->hotelname }} </td>
-                                <td> {{ $room->price }} </td>
-                                <td> {{ $room->room }} </td>
-                                <td> {{ $room->person }} </td>
-                                <td> {{ $room->checkin }} </td>
-                                <td> {{ $room->checkout }} </td>
-                                <td> {{ $room->address }} </td>
-                                <td> {{ $room->description }} </td>
-                                <td> {{ $room->image }} </td>
-                                <td> <a href="{{ route('roomdelete', $room->id) }}"
-                                        class="btn btn-danger btn-sm">Delete</a></td>
-                                <td> <a href="" class="btn btn-primary btn-sm">Edit</a></td>
+
+                                <td class="text-center"> {{ $room->city->city }} </td>
+                                <td class="text-center"> {{ $room->category->name }} </td>
+                                <td class="text-center"> {{ $room->hotelname }} </td>
+                                <td class="text-center"> RS-{{ $room->price }}/- <br>Room- {{ $room->room }} <br> Person-{{ $room->person }}</td>
+
+                                <td class="text-center"> {{ $room->checkin }} <br> {{ $room->checkout }}  </td>
+
+                                <td class="text-center"> {{ $room->address }} </td>
+                                <td class="text-center"> {{ $room->description }} </td>
+                                <td class="text-center">
+                                    <img src="{{ asset('storage/images/' . $room->image) }}" style="width: 40px; height: 45px; border-radius: 10px;" />
+                                </td>
+
+                                <td class="text-center"> <a href="{{ route('roomdelete', $room->hotelname) }}"
+                                        class="text-danger btn-md"><i class="fas fa-trash"></i></a>&nbsp;
+                                        <a href="{{ route('roomupdate', $room->id)}}" class="text-primary btn-md"><i class="fas fa-pen"></i></a></td>
                             </tr>
                         @endforeach
+                    </tbody>
+
                     </table>
                 </div>
             </div>
@@ -83,4 +114,6 @@
 
     </div>
     </div>
+</section>
+</div></div>
 @endsection

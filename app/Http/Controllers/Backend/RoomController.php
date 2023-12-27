@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Category;
+use App\Models\City;
 use App\Models\Room;
 use Illuminate\Support\Facades\DB;
 
@@ -15,6 +16,7 @@ class RoomController extends Controller
         return view('backend.category');
     }
     public function categoryData(){
+
         $data = DB::table('categories')->get();
         return view('backend.categorydata',['data' => $data]);
     }
@@ -32,6 +34,14 @@ class RoomController extends Controller
 
     }
 
+    public function searchhotel(Request $req)
+    {
+        $name = $req->search;
+        $data = Room::where('hotelname','%LIKE%',$name)->first();
+        return redirect()->back()->with('data',$data);
+
+    }
+
 
     public function search(Request $request)
     {
@@ -39,6 +49,8 @@ class RoomController extends Controller
         $room = Room::where('city_id','=',$city_id)->get();
        return view('frontend.room')->with('room',$room);
     }
+
+
 
     public function submitcategory(Request $request)
     {
@@ -104,22 +116,63 @@ class RoomController extends Controller
         return redirect()->back()->with('success', 'Room information saved successfully.');
     }
 
-    public function registerData(){
-        $data = DB::table('room')->get();
+    public function registerData(Request $req){
+        $name = $req['search'] ?? " ";
+
+        if($name != " ")
+        {
+        $data = Room::where('hotelname','LIKE',"%$name%")->get();
         return view('backend.roomdata',['data' => $data]);
+        }
+        else{
+
+        $data = Room::all();
+        return view('backend.roomdata',['data' => $data]);
+        }
     }
 
-    public function roomDelete($id){
-        $data = DB::table('room')->where('id', $id);
-
+    public function roomDelete($hotelname){
+        $data_room = Room::where('hotelname', $hotelname)->first();
+        $data2=$data_room->id;
+        $data = Room::where('id',$data2)->first();
         if ($data) {
 
-            DB::table('room')->where('id', $id)->delete();
+            $data->delete();
             return redirect()->back()->with('success', 'Room deleted successfully.');
 
         } else {
             return redirect()->back()->with('msg', 'Room not found or already deleted.');
         }
+    }
+
+    public function categoryUpdate($id){
+        $data = DB::table('categories')->find($id);
+        return view('backend.updateCategory',['data' => $data]);
+    }
+    public function updated(Request $req, $id){
+
+        $req->validate([
+            'name' =>'required'
+        ]);
+
+        $data = DB::table('categories')->where('id', $id)->update(
+            [
+                'name' => $req->name,
+            ]
+        );
+        if($data){
+            return redirect()->route('categorydata')->with('success',"Updated successfully");
+        }
+
+        return redirect()->back()->with('msg', 'No Update. Please Update Your Data or Go Back');
+    }
+
+
+    public function roomUpdate($id){
+        $data = DB::table('room')->find($id);
+        $city = City::all();
+        $category = Category::all();
+        return view('backend.updateRoom',['data' => $data,'city'=>$city,'category'=>$category]);
     }
 
 

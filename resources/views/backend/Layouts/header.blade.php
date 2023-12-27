@@ -13,6 +13,7 @@
   <!-- Tempusdominus Bbootstrap 4 -->
   <link rel="stylesheet" href="{{asset('backend/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css')}}">
   <!-- iCheck -->
+  <link rel="icon" href="{{asset('backend/dist/img/icon22.png')}}">
   <link rel="stylesheet" href="{{asset('backend/plugins/icheck-bootstrap/icheck-bootstrap.min.css')}}">
   <!-- JQVMap -->
   <link rel="stylesheet" href="{{asset('backend/plugins/jqvmap/jqvmap.min.css')}}">
@@ -127,12 +128,7 @@
                   <p>Room Category</p>
                 </a>
               </li>
-              <li class="nav-item">
-                <a href="{{route('city')}}" class="nav-link {{ Route::is('city*')? 'active' : '' }}">
 
-                  <p>City</p>
-                </a>
-              </li>
               <li class="nav-item">
                 <a href="{{route('roomregister')}}" class="nav-link">
 
@@ -155,7 +151,36 @@
 
             </ul>
           </li>
+          <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-copy"></i>
+              <p>
+                City
+                <i class="fas fa-angle-left right"></i>
 
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+
+              <li class="nav-item">
+                <a href="{{route('city')}}" class="nav-link {{ Route::is('city*')? 'active' : '' }}">
+
+                  <p>City</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{route('citydata')}}" class="nav-link {{ Route::is('citydata*')? 'active' : '' }}">
+
+                  <p>City View</p>
+                </a>
+              </li>
+
+
+
+
+
+            </ul>
+          </li>
         </ul>
       </nav>
       <!-- /.sidebar-menu -->

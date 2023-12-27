@@ -44,16 +44,15 @@
                     </div>
                     <div class="row g-4">
                         @foreach ($room as $roomdata)
-                            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-                                <div class="room-item shadow rounded overflow-hidden">
-                                    <div class="position-relative">
-                                        <img class="img-fluid" src="{{ asset('storage/images/' . $roomdata->image) }}"
-                                            alt="">
-                                        <small
-                                            class="position-absolute start-0 top-100 translate-middle-y bg-primary text-white rounded py-1 px-3 ms-4">{{ $roomdata->price }}
-                                            PKR / Night
-                                        </small>
-                                    </div>
+                        <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                            <div class="room-item shadow rounded overflow-hidden">
+                                <div class="position-relative d-flex room-container">
+                                    <img class="img-fluid room-image" src="{{ asset('storage/images/' . $roomdata->image) }}" alt="">
+                                    <small class="small-tag">
+                                        {{ $roomdata->price }} PKR / Night
+                                    </small>
+                                </div>
+
                                     <div class="p-4 mt-2">
                                         <div class="d-flex flex-column mb-3">
                                             <div class="mb-2">

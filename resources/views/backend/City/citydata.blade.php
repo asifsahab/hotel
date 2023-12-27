@@ -31,7 +31,7 @@
         @endif
 
         @if (session('success'))
-            <div id="alertSuccess" class="alert alert-success alert-dismissible fade show text-center" role="alert">
+            <div id="alertSuccess" class="alert alert-primary alert-dismissible fade show text-center" role="alert">
                 <strong>{{ session('success') }}</strong>
             </div>
             <script>
@@ -47,17 +47,19 @@
                     <table class="table table-bordered table-striped" style="color: blue">
                         <tr>
                             <th>City</th>
-                            <th>Delete</th>
-                            <th>Edit</th>
+                            <th>Action</th>
                         </tr>
                         @foreach ($data as $id => $city)
                             <tr>
                                 <td> {{ $city->city }} </td>
-                                <td> <a href="{{ route('citydelete', $city->id) }}" class="btn btn-danger btn-sm">Delete</a></td>
-                                <td> <a href="" class="btn btn-primary btn-sm">Edit</a></td>
+                                <td> <a href="{{ route('citydelete', $city->id) }}" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></a>
+                                 <a href="{{ route('cityupdate', $city->id)}}" class="btn btn-primary btn-sm"><i class="fas fa-pen"></i></a></td>
                             </tr>
                         @endforeach
                     </table>
+                    @if(isset($data))
+                    {{ $data->links('pagination::bootstrap-5') }}
+                    @endif
                 </div>
             </div>
         </div>
