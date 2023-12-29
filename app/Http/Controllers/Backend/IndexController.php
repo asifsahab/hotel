@@ -17,13 +17,5 @@ class IndexController extends Controller
         ->with('room',$room)
         ->with('city',$city);
     }
-    public function roomregister()
-    {
-        $city = City::all();
-        $category = Category::all();
-        return view('backend.room')
-        ->with('city',$city)
-        ->with('category',$category);
-    }
 
 }

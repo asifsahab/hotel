@@ -11,37 +11,6 @@ use Illuminate\Support\Facades\DB;
 
 class RoomController extends Controller
 {
-    public function category()
-    {
-        return view('backend.category');
-    }
-    public function categoryData(){
-
-        $data = DB::table('categories')->get();
-        return view('backend.categorydata',['data' => $data]);
-    }
-    public function categoryDelete($id){
-        $data = Room::where('category_id', $id)->count();
-        $category = Category::where('id',$id)->first();
-        if($data==0)
-        {
-            $category->delete();
-            return redirect()->route('categorydata')->with('success',"Deleted successfully");
-
-        }
-
-        return redirect()->back()->with('msg', 'Unable to delete Category. '.$data.' active record are associated with it.');
-
-    }
-
-    public function searchhotel(Request $req)
-    {
-        $name = $req->search;
-        $data = Room::where('hotelname','%LIKE%',$name)->first();
-        return redirect()->back()->with('data',$data);
-
-    }
-
 
     public function search(Request $request)
     {
@@ -50,21 +19,13 @@ class RoomController extends Controller
        return view('frontend.room')->with('room',$room);
     }
 
-
-
-    public function submitcategory(Request $request)
+    public function roomregister()
     {
-        $request->validate([
-            'roomtype' =>'required'
-        ],
-    [
-        'roomtype.required' =>'Please Enter Room Type....',
-    ]);
-
-        $category = new Category();
-        $category->name = $request->roomtype;
-        $category->save();
-        return redirect()->back()->with('success', 'Category saved successfully.');
+        $city = City::all();
+        $category = Category::all();
+        return view('backend.room')
+        ->with('city',$city)
+        ->with('category',$category);
     }
 
     public function roomsubmit(Request $request)
@@ -116,25 +77,23 @@ class RoomController extends Controller
         return redirect()->back()->with('success', 'Room information saved successfully.');
     }
 
-    public function registerData(Request $req){
-        $name = $req['search'] ?? " ";
+    public function roomData(Request $req){
+    $name = $req['search'] ?? " ";
 
-        if($name != " ")
-        {
-        $data = Room::where('hotelname','LIKE',"%$name%")->get();
-        return view('backend.roomdata',['data' => $data]);
-        }
-        else{
-
-        $data = Room::all();
-        return view('backend.roomdata',['data' => $data]);
-        }
+    if ($name != " ") {
+        $data = Room::where('hotelname', 'LIKE', "%$name%")->paginate(5);
+    } else {
+        $data = Room::paginate(5);
     }
 
+    return view('backend.roomdata', ['data' => $data]);
+    }
+
+
     public function roomDelete($hotelname){
-        $data_room = Room::where('hotelname', $hotelname)->first();
-        $data2=$data_room->id;
-        $data = Room::where('id',$data2)->first();
+        $room = Room::where('hotelname', $hotelname)->first();
+        $id = $room->id;
+        $data = Room::where('id',$id)->first();
         if ($data) {
 
             $data->delete();
@@ -145,34 +104,42 @@ class RoomController extends Controller
         }
     }
 
-    public function categoryUpdate($id){
-        $data = DB::table('categories')->find($id);
-        return view('backend.updateCategory',['data' => $data]);
+
+    public function roomUpdate($hotelname){
+        $room = Room::where('hotelname', $hotelname)->first();
+        $id = $room->id;
+        $data = Room::where('id',$id)->first();
+        $city = City::all();
+        $category = Category::all();
+        if ($data) {
+        return view('backend.updateRoom',['data' => $data,'city'=>$city,'category'=>$category]);
+        }
     }
-    public function updated(Request $req, $id){
 
-        $req->validate([
-            'name' =>'required'
-        ]);
+    public function roomUpdated(Request $req, $hotelname){
 
-        $data = DB::table('categories')->where('id', $id)->update(
+        $room = Room::where('hotelname', $hotelname)->first();
+        $id = $room->id;
+        $data = Room::where('id',$id)->update(
             [
-                'name' => $req->name,
+                'city_id' => $req->city,
+                'category_id' => $req->category,
+                'hotelname' => $req->hotelname,
+                'price' => $req->price,
+                'room' => $req->room,
+                'person' => $req->person,
+                'checkin' => $req->checkin,
+                'checkout' => $req->checkout,
+                'address' => $req->address,
+                'description' => $req->description,
+                'image' => $req->image,
             ]
         );
         if($data){
-            return redirect()->route('categorydata')->with('success',"Updated successfully");
+            return redirect()->route('roomdata')->with('success',"Updated successfully");
         }
 
         return redirect()->back()->with('msg', 'No Update. Please Update Your Data or Go Back');
-    }
-
-
-    public function roomUpdate($id){
-        $data = DB::table('room')->find($id);
-        $city = City::all();
-        $category = Category::all();
-        return view('backend.updateRoom',['data' => $data,'city'=>$city,'category'=>$category]);
     }
 
 

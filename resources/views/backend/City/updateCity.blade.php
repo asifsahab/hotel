@@ -2,23 +2,25 @@
 @section('main-section')
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
-        <div class="content-header">
+        <section class="content-header">
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0 text-dark">Destination</h1>
-                    </div><!-- /.col -->
+                        <h1>Destination</h1>
+                    </div>
+                    <!-- /.col -->
                     <div class="col-sm-6">
-                        <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="{{ route('citydata') }}">
-                                    <h5><b>Go Back</b></h5>
-                                </a>
-                            </li>
-                        </ol>
-                    </div><!-- /.col -->
-                </div><!-- /.row -->
-            </div><!-- /.container-fluid -->
-        </div>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
+                                <li class="breadcrumb-item active"><a href="{{ route('citydata') }}">City</a></li>
+                            </ol>
+
+                            <a href="{{ route('citydata') }}" class="btn btn-info">View</a>
+                        </div>
+                    </div>
+                </div>
+        </section>
 
         @if (session('msg'))
             <div id="alertMsg" class="alert alert-danger alert-dismissible fade show text-center" role="alert">
@@ -27,7 +29,7 @@
             <script>
                 setTimeout(function() {
                     $('#alertMsg').alert('close');
-                }, 5000);
+                }, 3000);
             </script>
         @endif
 
@@ -39,7 +41,7 @@
                 </div>
                 <!-- /.card-header -->
                 <!-- form start -->
-                <form method="POST" action="{{ route('updated', $data->id) }}">
+                <form method="POST" action="{{ route('updated', $data->city) }}">
                     @csrf
                     <div class="card-body">
                         <div class="form-group">

@@ -2,21 +2,26 @@
 @section('main-section')
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
-        <div class="content-header">
+        <section class="content-header">
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0 text-dark">Categories</h1>
-                    </div><!-- /.col -->
+                        <h1>Category</h1>
+                    </div>
+                    <!-- /.col -->
                     <div class="col-sm-6">
-                        <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="{{ route('categorydata') }}"><h5><b>Go Back</b></h5></a>
-                            </li>
-                        </ol>
-                    </div><!-- /.col -->
-                </div><!-- /.row -->
-            </div><!-- /.container-fluid -->
-        </div>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
+                                <li class="breadcrumb-item active"><a href="{{ route('categorydata') }}">Category</a></li>
+                            </ol>
+
+                            <a href="{{ route('categorydata') }}" class="btn btn-info">View</a>
+                        </div>
+                    </div>
+                </div>
+        </section>
+
 
         @if (session('msg'))
             <div id="alertMsg" class="alert alert-danger alert-dismissible fade show text-center" role="alert">
@@ -25,7 +30,7 @@
             <script>
                 setTimeout(function() {
                     $('#alertMsg').alert('close');
-                }, 5000);
+                }, 3000);
             </script>
         @endif
 
@@ -40,7 +45,7 @@
                 <!-- form start -->
 
                 <div class="card-body">
-                    <form action="{{ route('categoryupdated', $data->id) }}" method="POST">
+                    <form action="{{ route('categoryupdated', $data->name) }}" method="POST">
                         @csrf
                         <div class="form-group">
                             <label for="exampleInputEmail1">Update Room Type:</label>

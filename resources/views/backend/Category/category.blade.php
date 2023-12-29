@@ -2,30 +2,34 @@
 @section('main-section')
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
-        <div class="content-header">
+        <section class="content-header">
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0 text-dark">Dashboard</h1>
-                    </div><!-- /.col -->
+                        <h1>Category</h1>
+                    </div>
+                    <!-- /.col -->
                     <div class="col-sm-6">
-                        <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="{{ route('categorydata') }}"><h5><b>View Categories</b></h5></a>
-                            </li>
-                        </ol>
-                    </div><!-- /.col -->
-                </div><!-- /.row -->
-            </div><!-- /.container-fluid -->
-        </div>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
+                                <li class="breadcrumb-item active"><a href="{{ route('category') }}">Category</a></li>
+                            </ol>
+
+                            <a href="{{ route('categorydata') }}" class="btn btn-info">View</a>
+                        </div>
+                    </div>
+                </div>
+        </section>
 
         @if (session('success'))
-            <div id="alertSuccess" class="alert alert-primary alert-dismissible fade show text-center" role="alert">
+            <div id="alertSuccess" class="alert alert-info alert-dismissible fade show text-center" role="alert">
                 <strong>{{ session('success') }}</strong>
             </div>
             <script>
                 setTimeout(function() {
                     $('#alertSuccess').alert('close');
-                }, 5000);
+                }, 3000);
             </script>
         @endif
 
