@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\City;
 use App\Models\Room;
+use App\Models\Contact;
+use Carbon\Carbon;
+use App\Http\Requests\RoomValidation;
 use Illuminate\Support\Facades\DB;
 
 class RoomController extends Controller
@@ -21,26 +24,23 @@ class RoomController extends Controller
 
     public function roomregister()
     {
+        // Alert Notification
+        $today = Carbon::today();
+        $totalcontact = Contact::whereDate('created_at', $today)->count();
+        $contactdata = Contact::all();
+        //
         $city = City::all();
         $category = Category::all();
         return view('backend.room')
         ->with('city',$city)
+        ->with('totalcontact',$totalcontact)
+        ->with('contactdata',$contactdata)
         ->with('category',$category);
     }
 
-    public function roomsubmit(Request $request)
+    public function roomsubmit(RoomValidation $request)
     {
         $request->validate([
-            'city' => 'required',
-            'category' => 'required',
-            'hotelname' => 'required',
-            'price' => 'required|integer|min:1',
-            'room' => 'required|integer|min:1',
-            'person' => 'required|integer|min:1',
-            'checkin' => 'required',
-            'checkout' => 'required',
-            'address' => 'required',
-            'description' => 'required',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // Adjust file type and size as needed
         ]);
 
@@ -54,6 +54,7 @@ class RoomController extends Controller
         $room->checkin = $request->input('checkin');
         $room->checkout = $request->input('checkout');
         $room->address = $request->input('address');
+        $room->status = $request->input('status');
         $room->description = $request->input('description');
 
         $image = $request->file('image');
@@ -77,16 +78,22 @@ class RoomController extends Controller
         return redirect()->back()->with('success', 'Room information saved successfully.');
     }
 
-    public function roomData(Request $req){
-    $name = $req['search'] ?? " ";
-
-    if ($name != " ") {
-        $data = Room::where('hotelname', 'LIKE', "%$name%")->paginate(5);
-    } else {
-        $data = Room::paginate(5);
-    }
-
-    return view('backend.roomdata', ['data' => $data]);
+    public function roomData(Request $req)
+    {
+        // Alert Notification
+        $today = Carbon::today();
+        $totalcontact = Contact::whereDate('created_at', $today)->count();
+        $contactdata = Contact::all();
+        //
+        $name = $req['search'] ?? " ";
+        if ($name != " ") {
+            $data = Room::where('hotelname', 'LIKE', "%$name%")->paginate(5);
+        } else {
+            $data = Room::paginate(5);
+        }
+        return view('backend.roomdata')->with('data', $data)
+        ->with('totalcontact',$totalcontact)
+        ->with('contactdata',$contactdata);
     }
 
 
@@ -106,35 +113,70 @@ class RoomController extends Controller
 
 
     public function roomUpdate($hotelname){
+        //Alert Notification
+        $today = Carbon::today();
+        $totalcontact = Contact::whereDate('created_at', $today)->count();
+        $contactdata = Contact::all();
+        //
         $room = Room::where('hotelname', $hotelname)->first();
         $id = $room->id;
         $data = Room::where('id',$id)->first();
         $city = City::all();
         $category = Category::all();
         if ($data) {
-        return view('backend.updateRoom',['data' => $data,'city'=>$city,'category'=>$category]);
+        return view('backend.updateRoom',['data' => $data,'city'=>$city,'category'=>$category, 'totalcontact'=>$totalcontact,'contactdata'=>$contactdata]);
         }
     }
 
-    public function roomUpdated(Request $req, $hotelname){
-
+    public function roomUpdated(RoomValidation $req, $hotelname){
         $room = Room::where('hotelname', $hotelname)->first();
         $id = $room->id;
-        $data = Room::where('id',$id)->update(
-            [
-                'city_id' => $req->city,
-                'category_id' => $req->category,
-                'hotelname' => $req->hotelname,
-                'price' => $req->price,
-                'room' => $req->room,
-                'person' => $req->person,
-                'checkin' => $req->checkin,
-                'checkout' => $req->checkout,
-                'address' => $req->address,
-                'description' => $req->description,
-                'image' => $req->image,
-            ]
-        );
+        $roomimage = $req->image;
+        if($roomimage)
+        {
+            $originalExtension = $roomimage->getClientOriginalExtension();
+
+            $fileName = 'image_' . time() . '.' . $originalExtension;
+            //image_10245814.png
+            $roomimage->storeAs('images', $fileName, 'public');
+            $data = Room::where('id',$id)->update(
+
+                [
+                    'city_id' => $req->city,
+                    'category_id' => $req->category,
+                    'hotelname' => $req->hotelname,
+                    'price' => $req->price,
+                    'room' => $req->room,
+                    'person' => $req->person,
+                    'checkin' => $req->checkin,
+                    'checkout' => $req->checkout,
+                    'address' => $req->address,
+                    'status' => $req->status,
+                    'description' => $req->description,
+                    'image' => $fileName,
+                ]
+            );
+        }
+        else
+        {
+            $data = Room::where('id',$id)->update(
+
+                [
+                    'city_id' => $req->city,
+                    'category_id' => $req->category,
+                    'hotelname' => $req->hotelname,
+                    'price' => $req->price,
+                    'room' => $req->room,
+                    'person' => $req->person,
+                    'checkin' => $req->checkin,
+                    'checkout' => $req->checkout,
+                    'address' => $req->address,
+                    'description' => $req->description,
+
+                ]
+            );
+        }
+
         if($data){
             return redirect()->route('roomdata')->with('success',"Updated successfully");
         }

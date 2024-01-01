@@ -7,25 +7,39 @@ use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\City;
 use App\Models\Room;
+use App\Models\Contact;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 
 class CategoryController extends Controller
 {
     public function category()
     {
-        return view('backend.Category.category');
+        //Alert Notification
+        $today = Carbon::today();
+        $totalcontact = Contact::whereDate('created_at', $today)->count();
+        $contactdata = Contact::all();
+        //
+        return view('backend.Category.category')
+        ->with('totalcontact',$totalcontact)
+        ->with('contactdata',$contactdata);
     }
 
     public function categoryData(Request $req){
-
+        //Alert Notification
+        $today = Carbon::today();
+        $totalcontact = Contact::whereDate('created_at', $today)->count();
+        $contactdata = Contact::all();
+        //
         $name = $req['search'] ?? " ";
-
-    if ($name != " ") {
-        $data = Category::where('name', 'LIKE', "%$name%")->paginate(5);
-    } else {
-        $data = Category::paginate(5);
-    }
-        return view('backend.Category.categorydata',['data' => $data]);
+        if ($name != " ") {
+            $data = Category::where('name', 'LIKE', "%$name%")->paginate(5);
+        } else {
+            $data = Category::paginate(5);
+        }
+        return view('backend.Category.categorydata')->with('data', $data)
+        ->with('totalcontact',$totalcontact)
+        ->with('contactdata',$contactdata);
     }
 
     public function categoryDelete($name){
@@ -60,11 +74,18 @@ class CategoryController extends Controller
     }
 
     public function categoryUpdate($name){
+        //Alert Notification
+        $today = Carbon::today();
+        $totalcontact = Contact::whereDate('created_at', $today)->count();
+        $contactdata = Contact::all();
+        //
         $category = Category::where('name', $name)->first();
         $id = $category->id;
         $data = Category::where('id',$id)->first();
 
-        return view('backend.Category.updateCategory',['data' => $data]);
+        return view('backend.Category.updateCategory')->with('data', $data)
+        ->with('totalcontact',$totalcontact)
+        ->with('contactdata',$contactdata);
     }
 
     public function updated(Request $req, $name){

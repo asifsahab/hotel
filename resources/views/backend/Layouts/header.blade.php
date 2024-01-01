@@ -50,17 +50,54 @@
 
             <!-- SEARCH FORM -->
             <ul class="nav nav-pills nav-sidebar ml-auto" data-widget="treeview" role="menu" data-accordion="false">
+                <li class="nav-item dropdown">
+                    <a class="nav-link" data-toggle="dropdown" href="#">
+                        <i class="far fa-bell"></i>
+                        @if (isset($totalcontact))
+                            <span class="badge badge-warning navbar-badge">{{ $totalcontact }}</span>
+                        @else
+                            <span class="badge badge-warning navbar-badge">0</span>
+                        @endif
+                    </a>
+                    <!-- Add your notification dropdown content here -->
+                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                        <!-- Display the first 4 notifications in descending order of creation -->
+                        @if (isset($contactdata) && count($contactdata) > 0)
+                            @foreach ($contactdata->sortByDesc('created_at')->take(4) as $contact)
+                                <div class="dropdown-item">
+                                    <a href="{{ route('contact') }}">
+                                        <i class="fas fa-envelope mr-2"></i>{{ $contact->name }}
+                                        <span
+                                            class="float-right text-muted text-md">{{ $contact->created_at->shortRelativeDiffForHumans() }}</span>
+                                    </a>
+                                </div>
+                            @endforeach
+
+                            <!-- Check if there are more than 4 items -->
+                            @if (count($contactdata) > 4)
+                                <div class="dropdown-divider"></div>
+                                <div class="dropdown-item">
+                                    <a href="{{ route('contact') }}">See More</a>
+                                </div>
+                            @endif
+                        @else
+                            <!-- Display a message if there are no notifications -->
+                            <div class="dropdown-item">
+                                <span>No notifications available</span>
+                            </div>
+                        @endif
+                    </div>
+
+                </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('logout') }}"
                         onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                        <i class="fas fa-power-off"></i>
+                        <i class="fas fa-power-off"></i> <!-- Font Awesome power-off icon -->
                         <p>Logout</p>
                     </a>
-
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                         @csrf
                     </form>
-
                 </li>
             </ul>
 
@@ -203,6 +240,27 @@
                                         class="nav-link {{ Route::is('citydata*') ? 'active' : '' }}">
 
                                         <p>City View</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item has-treeview">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fas fa-copy"></i>
+                                <p>
+                                    Contact
+                                    <i class="fas fa-angle-left right"></i>
+
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+
+
+                                <li class="nav-item">
+                                    <a href="{{ route('contactview') }}"
+                                        class="nav-link {{ Route::is('contact/view*') ? 'active' : '' }}">
+
+                                        <p>Contact View</p>
                                     </a>
                                 </li>
                             </ul>

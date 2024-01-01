@@ -83,6 +83,7 @@
                                             <th class="text-center">Time</th>
                                             <th class="text-center">Address</th>
                                             <th class="text-center">Description</th>
+                                            <th class="text-center">Status</th>
                                             <th class="text-center">Image</th>
                                             <th class="text-center">Action</th>
 
@@ -103,6 +104,8 @@
 
                                                 <td class="text-center"> {{ $room->address }} </td>
                                                 <td class="text-center"> {{ $room->description }} </td>
+                                                <td class="text-center">@if($room->status == 1)<span class="badge badge-success">Available</span>@else <span class="badge badge-danger">Un-Available</span>@endif</td>
+
                                                 <td class="text-center">
                                                     <img src="{{ asset('storage/images/' . $room->image) }}"
                                                         style="width: 40px; height: 45px; border-radius: 10px;" />

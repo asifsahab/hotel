@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Frontend\HomeController;
+use App\Http\Controllers\Frontend\BookingController;
+use App\Http\Controllers\Frontend\ContactController;
 use App\Http\Controllers\Backend\{
     IndexController,
     CityController,
@@ -21,9 +23,7 @@ use App\Http\Controllers\Backend\{
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-Route::get('/',function(){
-return view('frontend.index');
-})->name('index');
+Route::get('/', [HomeController::class,'index'])->name('index');
 
 Auth::routes();
 
@@ -32,6 +32,7 @@ Auth::routes();
 Route::middleware(['auth'])->group(function () {
 
     Route::get('/admin/home', [IndexController::class, 'admin'])->name('home');
+
 
 
 // City Routes:
@@ -45,7 +46,6 @@ Route::controller(CityController::class)->group(function ()
     Route::post('/updated/{city}', 'updated')->name('updated');
 });
 
-
 // Category Routes:
 Route::controller(CategoryController::class)->group(function()
 {
@@ -56,6 +56,7 @@ Route::get('/category/delete/{name}', 'categoryDelete')->name('categorydelete');
 Route::get('/category/update/{name}',  'categoryUpdate')->name('categoryupdate');
 Route::post('/category/updated{name}',  'updated')->name('categoryupdated');
 });
+Route::get('/contact/view', [ContactController::class, 'contactview'])->name('contactview');
 
 
 // Room Routes:
@@ -78,14 +79,19 @@ Route::get('/about',[HomeController::class,'about'])->name('about');
 Route::get('/booking',[HomeController::class,'booking'])->name('booking');
 Route::get('/contact',[HomeController::class,'contact'])->name('contact');
 Route::get('/room',[HomeController::class,'room'])->name('room');
+Route::get('/room/detail/{hotelname}',[HomeController::class,'roomdetail'])->name('detailroom');
+Route::get('/room/booking/{hotelname}',[HomeController::class,'roombooking'])->name('roombooking');
 Route::get('/service',[HomeController::class,'service'])->name('service');
 Route::get('/team',[HomeController::class,'team'])->name('team');
 Route::get('/testimonial',[HomeController::class,'testimonial'])->name('testimonial');
 
+Route::post('/contat/submit', [ContactController::class, 'contactsubmit'])->name('contact.submit');
 
 Route::post('/sreach', [RoomController::class, 'search'])->name('search');
 
+Route::post('booking/submit',[BookingController::class,'bookingsubmit'])->name('bookingsubmit');
 
-Route::any('{slug}',function(){
-return view('frontend.index');
-});
+
+
+
+

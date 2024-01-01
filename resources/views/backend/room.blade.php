@@ -166,6 +166,21 @@
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Select Status</label>
+                            <select class="form-control" name="status">
+                                <option selected disabled name="status">Select Status</option>
+
+                                        <option value="1"
+                                           >Available</option>
+                                           <option value="0"
+                                          >Un- Available</option>
+
+                            </select>
+                            @error('status')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
 
                         <div class="form-group">
                             <label for="exampleInputFile">Choose an image file:</label>

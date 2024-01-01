@@ -67,6 +67,8 @@
     <script src="{{ asset('frontend/lib/tempusdominus/js/moment.min.js') }}"></script>
     <script src="{{ asset('frontend/lib/tempusdominus/js/moment-timezone.min.js') }}"></script>
     <script src="{{ asset('frontend/lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
 
     <!-- Template Javascript -->
     <script src="{{ asset('frontend/js/main.js') }}"></script>

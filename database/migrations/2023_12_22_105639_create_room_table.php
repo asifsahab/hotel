@@ -22,6 +22,7 @@ return new class extends Migration
             $table->date('checkin');
             $table->date('checkout');
             $table->string('address');
+            $table->boolean('status');
             $table->text('description');
             $table->string('image'); // Assuming the image is stored as a file path
             $table->timestamps();

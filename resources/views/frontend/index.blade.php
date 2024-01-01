@@ -137,7 +137,7 @@
                                     <div class="border rounded p-1">
                                         <div class="border rounded text-center p-4">
                                             <i class="fa fa-hotel fa-2x text-primary mb-2"></i>
-                                            <h2 class="mb-1" data-toggle="counter-up">1234</h2>
+                                            <h2 class="mb-1" data-toggle="counter-up">{{$totalroom}}</h2>
                                             <p class="mb-0">Rooms</p>
                                         </div>
                                     </div>
@@ -197,109 +197,53 @@
                         <h1 class="mb-5">Explore Our <span class="text-primary text-uppercase">Rooms</span></h1>
                     </div>
                     <div class="row g-4">
+                        @foreach ($room as $roomdata)
                         <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
                             <div class="room-item shadow rounded overflow-hidden">
-                                <div class="position-relative">
-                                    <img class="img-fluid" src="{{ asset('frontend/img/room-1.jpg') }}" alt="">
-                                    <small
-                                        class="position-absolute start-0 top-100 translate-middle-y bg-primary text-white rounded py-1 px-3 ms-4">$100/Night</small>
+                                <div class="position-relative d-flex room-container">
+                                    <img class="img-fluid room-image" src="{{ asset('storage/images/' . $roomdata->image) }}" alt="">
+                                    <small class="small-tag">
+                                        {{ $roomdata->price }} PKR / Night
+                                    </small>
                                 </div>
-                                <div class="p-4 mt-2">
-                                    <div class="d-flex justify-content-between mb-3">
-                                        <h5 class="mb-0">Junior Suite</h5>
-                                        <div class="ps-2">
-                                            <small class="fa fa-star text-primary"></small>
-                                            <small class="fa fa-star text-primary"></small>
-                                            <small class="fa fa-star text-primary"></small>
-                                            <small class="fa fa-star text-primary"></small>
-                                            <small class="fa fa-star text-primary"></small>
+
+                                    <div class="p-4 mt-2">
+                                        <div class="d-flex flex-column mb-3">
+                                            <div class="mb-2">
+                                                <b style="font-size:25px; ">{{ $roomdata->hotelname }} </b><b
+                                                    style="font-size:15px; ">- {{ $roomdata->city->city }}</b>
+                                            </div>
+                                            <div>
+                                                <a href="{{ 'https://www.google.com/maps/search/?api=1&query=' . urlencode($roomdata->address) }}"
+                                                    target="_blank">
+                                                    {{ $roomdata->address }} - show on map
+                                                </a><br>
+                                                <p>{{ $roomdata->category->name }}</p>
+                                            </div>
+
                                         </div>
-                                    </div>
-                                    <div class="d-flex mb-3">
-                                        <small class="border-end me-3 pe-3"><i class="fa fa-bed text-primary me-2"></i>3
-                                            Bed</small>
-                                        <small class="border-end me-3 pe-3"><i class="fa fa-bath text-primary me-2"></i>2
-                                            Bath</small>
-                                        <small><i class="fa fa-wifi text-primary me-2"></i>Wifi</small>
-                                    </div>
-                                    <p class="text-body mb-3">Erat ipsum justo amet duo et elitr dolor, est duo duo eos
-                                        lorem sed diam stet diam sed stet lorem.</p>
-                                    <div class="d-flex justify-content-between">
-                                        <a class="btn btn-sm btn-primary rounded py-2 px-4" href="">View Detail</a>
-                                        <a class="btn btn-sm btn-dark rounded py-2 px-4" href="">Book Now</a>
+
+                                        <div class="d-flex mb-3">
+                                            <small class="border-end me-3 pe-3"><i
+                                                    class="fa fa-bed text-primary me-2"></i>{{ $roomdata->room }}
+                                                Room</small>
+                                            <small class="border-end me-3 pe-3"><i
+                                                    class="fa fa-user text-primary me-2"></i>{{ $roomdata->person }}
+                                                Persons</small>
+                                            <small><i class="fa fa-wifi text-primary me-2"></i>Wifi</small>
+                                        </div>
+                                        <p class="text-body mb-3">{{ $roomdata->description }}</p>
+                                        <div class="d-flex justify-content-between">
+                                            <a class="btn btn-sm btn-primary rounded py-2 px-4" href="">View
+                                                Detail</a>
+                                            <a class="btn btn-sm btn-dark rounded py-2 px-4" href="">Book Now</a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
+                            @endforeach
                         </div>
-                        <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
-                            <div class="room-item shadow rounded overflow-hidden">
-                                <div class="position-relative">
-                                    <img class="img-fluid" src="{{ asset('frontend/img/room-2.jpg') }}" alt="">
-                                    <small
-                                        class="position-absolute start-0 top-100 translate-middle-y bg-primary text-white rounded py-1 px-3 ms-4">$200/Night</small>
-                                </div>
-                                <div class="p-4 mt-2">
-                                    <div class="d-flex justify-content-between mb-3">
-                                        <h5 class="mb-0">Executive Suite</h5>
-                                        <div class="ps-2">
-                                            <small class="fa fa-star text-primary"></small>
-                                            <small class="fa fa-star text-primary"></small>
-                                            <small class="fa fa-star text-primary"></small>
-                                            <small class="fa fa-star text-primary"></small>
-                                            <small class="fa fa-star text-primary"></small>
-                                        </div>
-                                    </div>
-                                    <div class="d-flex mb-3">
-                                        <small class="border-end me-3 pe-3"><i class="fa fa-bed text-primary me-2"></i>3
-                                            Bed</small>
-                                        <small class="border-end me-3 pe-3"><i class="fa fa-bath text-primary me-2"></i>2
-                                            Bath</small>
-                                        <small><i class="fa fa-wifi text-primary me-2"></i>Wifi</small>
-                                    </div>
-                                    <p class="text-body mb-3">Erat ipsum justo amet duo et elitr dolor, est duo duo eos
-                                        lorem sed diam stet diam sed stet lorem.</p>
-                                    <div class="d-flex justify-content-between">
-                                        <a class="btn btn-sm btn-primary rounded py-2 px-4" href="">View Detail</a>
-                                        <a class="btn btn-sm btn-dark rounded py-2 px-4" href="">Book Now</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.6s">
-                            <div class="room-item shadow rounded overflow-hidden">
-                                <div class="position-relative">
-                                    <img class="img-fluid" src="{{ asset('frontend/img/room-3.jpg') }}" alt="">
-                                    <small
-                                        class="position-absolute start-0 top-100 translate-middle-y bg-primary text-white rounded py-1 px-3 ms-4">$300/Night</small>
-                                </div>
-                                <div class="p-4 mt-2">
-                                    <div class="d-flex justify-content-between mb-3">
-                                        <h5 class="mb-0">Super Deluxe</h5>
-                                        <div class="ps-2">
-                                            <small class="fa fa-star text-primary"></small>
-                                            <small class="fa fa-star text-primary"></small>
-                                            <small class="fa fa-star text-primary"></small>
-                                            <small class="fa fa-star text-primary"></small>
-                                            <small class="fa fa-star text-primary"></small>
-                                        </div>
-                                    </div>
-                                    <div class="d-flex mb-3">
-                                        <small class="border-end me-3 pe-3"><i class="fa fa-bed text-primary me-2"></i>3
-                                            Bed</small>
-                                        <small class="border-end me-3 pe-3"><i class="fa fa-bath text-primary me-2"></i>2
-                                            Bath</small>
-                                        <small><i class="fa fa-wifi text-primary me-2"></i>Wifi</small>
-                                    </div>
-                                    <p class="text-body mb-3">Erat ipsum justo amet duo et elitr dolor, est duo duo eos
-                                        lorem sed diam stet diam sed stet lorem.</p>
-                                    <div class="d-flex justify-content-between">
-                                        <a class="btn btn-sm btn-primary rounded py-2 px-4" href="">View Detail</a>
-                                        <a class="btn btn-sm btn-dark rounded py-2 px-4" href="">Book Now</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+
                 </div>
             </div>
             <!-- Room End -->
@@ -314,7 +258,7 @@
                     </div>
                     <div class="row g-4">
                         <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-                            <a class="service-item rounded" href="{{ route('room') }}">
+                            <a class="service-item rounded" >
                                 <div class="service-icon bg-transparent border rounded p-1">
                                     <div
                                         class="w-100 h-100 border rounded d-flex align-items-center justify-content-center">
@@ -327,7 +271,7 @@
                             </a>
                         </div>
                         <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.2s">
-                            <a class="service-item rounded" href="{{ route('room') }}">
+                            <a class="service-item rounded" >
                                 <div class="service-icon bg-transparent border rounded p-1">
                                     <div
                                         class="w-100 h-100 border rounded d-flex align-items-center justify-content-center">
@@ -340,7 +284,7 @@
                             </a>
                         </div>
                         <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
-                            <a class="service-item rounded" href="{{ route('room') }}">
+                            <a class="service-item rounded" >
                                 <div class="service-icon bg-transparent border rounded p-1">
                                     <div
                                         class="w-100 h-100 border rounded d-flex align-items-center justify-content-center">
@@ -353,7 +297,7 @@
                             </a>
                         </div>
                         <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.4s">
-                            <a class="service-item rounded" href="{{ route('room') }}">
+                            <a class="service-item rounded" >
                                 <div class="service-icon bg-transparent border rounded p-1">
                                     <div
                                         class="w-100 h-100 border rounded d-flex align-items-center justify-content-center">
@@ -366,7 +310,7 @@
                             </a>
                         </div>
                         <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
-                            <a class="service-item rounded" href="{{ route('room') }}">
+                            <a class="service-item rounded" >
                                 <div class="service-icon bg-transparent border rounded p-1">
                                     <div
                                         class="w-100 h-100 border rounded d-flex align-items-center justify-content-center">
@@ -379,7 +323,7 @@
                             </a>
                         </div>
                         <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.6s">
-                            <a class="service-item rounded" href="{{ route('room') }}">
+                            <a class="service-item rounded" >
                                 <div class="service-icon bg-transparent border rounded p-1">
                                     <div
                                         class="w-100 h-100 border rounded d-flex align-items-center justify-content-center">
@@ -397,56 +341,7 @@
             <!-- Service End -->
 
 
-            <!-- Testimonial Start -->
-            <div class="container-xxl testimonial my-5 py-5 bg-dark wow zoomIn" data-wow-delay="0.1s">
-                <div class="container">
-                    <div class="owl-carousel testimonial-carousel py-5">
-                        <div class="testimonial-item position-relative bg-white rounded overflow-hidden">
-                            <p>Absolutely loved my stay! The room was so cozy, and the staff went above and beyond to make
-                                me feel at home. Can't wait to come back</p>
-                            <div class="d-flex align-items-center">
-                                <img class="img-fluid flex-shrink-0 rounded"
-                                    src="{{ asset('frontend/img/testimonial-1.jpg') }}"
-                                    style="width: 45px; height: 45px;">
-                                <div class="ps-3">
-                                    <h6 class="fw-bold mb-1">Emily</h6>
-                                </div>
-                            </div>
-                            <i
-                                class="fa fa-quote-right fa-3x text-primary position-absolute end-0 bottom-0 me-4 mb-n1"></i>
-                        </div>
-                        <div class="testimonial-item position-relative bg-white rounded overflow-hidden">
-                            <p>Impressed by the impeccable service and attention to detail. The apartment was spacious and
-                                beautifully decorated. A truly delightful stay.</p>
-                            <div class="d-flex align-items-center">
-                                <img class="img-fluid flex-shrink-0 rounded"
-                                    src="{{ asset('frontend/img/testimonial-2.jpg') }}"
-                                    style="width: 45px; height: 45px;">
-                                <div class="ps-3">
-                                    <h6 class="fw-bold mb-1">Michael Johnson</h6>
-                                </div>
-                            </div>
-                            <i
-                                class="fa fa-quote-right fa-3x text-primary position-absolute end-0 bottom-0 me-4 mb-n1"></i>
-                        </div>
-                        <div class="testimonial-item position-relative bg-white rounded overflow-hidden">
-                            <p>Had a wonderful time at this hotel! The room was clean and comfortable, and the staff was
-                                incredibly friendly. Overall, a fantastic experience—highly recommend.</p>
-                            <div class="d-flex align-items-center">
-                                <img class="img-fluid flex-shrink-0 rounded"
-                                    src="{{ asset('frontend/img/testimonial-3.jpg') }}"
-                                    style="width: 45px; height: 45px;">
-                                <div class="ps-3">
-                                    <h6 class="fw-bold mb-1">David</h6>
-                                </div>
-                            </div>
-                            <i
-                                class="fa fa-quote-right fa-3x text-primary position-absolute end-0 bottom-0 me-4 mb-n1"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Testimonial End -->
+
 
 
             <!-- Team Start -->

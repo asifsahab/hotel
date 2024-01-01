@@ -13,12 +13,34 @@ class HomeController extends Controller
     public function index(){
 
         $city = City::all();
+        $room = Room::latest()->take(3)->get();
+        $totalroom = Room::count();
+
         return view('frontend.index')
-        ->with('city',$city);
+        ->with('city',$city)
+        ->with('totalroom',$totalroom)
+        ->with('room',$room);
 
     }
-    
 
+public function roomdetail(Request $request,$hotelname)
+{
+    $hotelname2 = $hotelname;
+    $room = Room::where('hotelname', $hotelname2)->first();
+
+    return view('frontend.roomdetail')
+    ->with('room',$room);
+
+}
+public function roombooking(Request $request,$hotelname)
+{
+    $hotelname2 = $hotelname;
+    $room = Room::where('hotelname', $hotelname2)->first();
+
+    return view('frontend.booking')
+    ->with('room',$room);
+
+}
     public function about(){
         return view('frontend.about');
     }

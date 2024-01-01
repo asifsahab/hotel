@@ -80,9 +80,14 @@
                                         </div>
                                         <p class="text-body mb-3">{{ $roomdata->description }}</p>
                                         <div class="d-flex justify-content-between">
-                                            <a class="btn btn-sm btn-primary rounded py-2 px-4" href="">View
+                                            <a class="btn btn-sm btn-primary rounded py-2 px-4"
+                                            href="{{route('detailroom', $roomdata->hotelname)}}">View
                                                 Detail</a>
-                                            <a class="btn btn-sm btn-dark rounded py-2 px-4" href="">Book Now</a>
+                                                @if($roomdata->status==1)
+                                            <a class="btn btn-sm btn-dark rounded py-2 px-4" href="{{route('roombooking', $roomdata->hotelname)}}">Book Now</a>
+                                            @else
+                                            <a class="btn btn-sm btn-dark disabled rounded py-2 px-4" href="{{route('roombooking', $roomdata->hotelname)}}">Book Now</a>
+                                            @endif
                                         </div>
                                     </div>
                                 </div>
@@ -93,51 +98,6 @@
             </div>
             <!-- Room End -->
 
-
-            <!-- Testimonial Start -->
-            <div class="container-xxl testimonial my-5 py-5 bg-dark wow zoomIn" data-wow-delay="0.1s">
-                <div class="container">
-                    <div class="owl-carousel testimonial-carousel py-5">
-                        <div class="testimonial-item position-relative bg-white rounded overflow-hidden">
-                            <p>Absolutely loved my stay! The room was so cozy, and the staff went above and beyond to make
-                                me feel at home. Can't wait to come back</p>
-                            <div class="d-flex align-items-center">
-                                <img class="img-fluid flex-shrink-0 rounded"
-                                    src="{{ asset('frontend/img/testimonial-1.jpg') }}" style="width: 45px; height: 45px;">
-                                <div class="ps-3">
-                                    <h6 class="fw-bold mb-1">Emily</h6>
-                                </div>
-                            </div>
-                            <i class="fa fa-quote-right fa-3x text-primary position-absolute end-0 bottom-0 me-4 mb-n1"></i>
-                        </div>
-                        <div class="testimonial-item position-relative bg-white rounded overflow-hidden">
-                            <p>Impressed by the impeccable service and attention to detail. The apartment was spacious and
-                                beautifully decorated. A truly delightful stay.</p>
-                            <div class="d-flex align-items-center">
-                                <img class="img-fluid flex-shrink-0 rounded"
-                                    src="{{ asset('frontend/img/testimonial-2.jpg') }}" style="width: 45px; height: 45px;">
-                                <div class="ps-3">
-                                    <h6 class="fw-bold mb-1">Michael Johnson</h6>
-                                </div>
-                            </div>
-                            <i class="fa fa-quote-right fa-3x text-primary position-absolute end-0 bottom-0 me-4 mb-n1"></i>
-                        </div>
-                        <div class="testimonial-item position-relative bg-white rounded overflow-hidden">
-                            <p>Had a wonderful time at this hotel! The room was clean and comfortable, and the staff was
-                                incredibly friendly. Overall, a fantastic experience—highly recommend.</p>
-                            <div class="d-flex align-items-center">
-                                <img class="img-fluid flex-shrink-0 rounded"
-                                    src="{{ asset('frontend/img/testimonial-3.jpg') }}" style="width: 45px; height: 45px;">
-                                <div class="ps-3">
-                                    <h6 class="fw-bold mb-1">David</h6>
-                                </div>
-                            </div>
-                            <i class="fa fa-quote-right fa-3x text-primary position-absolute end-0 bottom-0 me-4 mb-n1"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Testimonial End -->
 
 
             <!-- Newsletter Start -->

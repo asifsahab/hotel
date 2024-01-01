@@ -16,7 +16,7 @@
      <!-- Icon Font Stylesheet -->
      <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
      <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
-
+     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.css">
      <!-- Libraries Stylesheet -->
      <link href="{{ asset('frontend/lib/animate/animate.min.css') }}" rel="stylesheet">
      <link href="{{ asset('frontend/lib/owlcarousel/assets/owl.carousel.min.css') }}" rel="stylesheet">
@@ -75,16 +75,11 @@
                         <div class="navbar-nav mr-auto py-0">
                             <a href="{{route('index')}}" class="nav-item nav-link">Home</a>
                             <a href="{{route('about')}}" class="nav-item nav-link">About</a>
-                            <a href="{{route('service')}}" class="nav-item nav-link">Services</a>
+                            <a href="{{route('booking')}}" class="nav-item nav-link">Booking</a>
                             <a href="{{route('room')}}" class="nav-item nav-link">Rooms</a>
-                            <div class="nav-item dropdown">
-                                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
-                                <div class="dropdown-menu rounded-0 m-0">
-                                    <a href="{{route('booking')}}" class="dropdown-item">Booking</a>
-                                    <a href="{{route('team')}}" class="dropdown-item">Our Team</a>
-                                    <a href="{{route('testimonial')}}" class="dropdown-item">Testimonial</a>
-                                </div>
-                            </div>
+                            <a href="{{route('service')}}" class="nav-item nav-link">Services</a>
+                            <a href="{{route('team')}}" class="nav-item nav-link">Our Team</a>
+
                             <a href="{{route('contact')}}" class="nav-item nav-link">Contact</a>
                         </div>
                     </div>

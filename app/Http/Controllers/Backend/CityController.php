@@ -6,13 +6,22 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\City;
 use App\Models\Room;
+use App\Models\Contact;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 
 class CityController extends Controller
 {
     public function city()
     {
-        return view('backend.City.city');
+        //Alert Notification
+        $today = Carbon::today();
+        $totalcontact = Contact::whereDate('created_at', $today)->count();
+        $contactdata = Contact::all();
+        //
+        return view('backend.City.city')
+        ->with('totalcontact',$totalcontact)
+        ->with('contactdata',$contactdata);
     }
 
     public function submit(Request $request)
@@ -31,15 +40,20 @@ class CityController extends Controller
 
 
     public function cityData(Request $req){
+        //Alert Notification
+        $today = Carbon::today();
+        $totalcontact = Contact::whereDate('created_at', $today)->count();
+        $contactdata = Contact::all();
+        //
         $name = $req['search'] ?? " ";
-
-    if ($name != " ") {
-        $data = City::where('city', 'LIKE', "%$name%")->paginate(5);
-    } else {
-        $data = City::paginate(5);
-    }
-
-    return view('backend.City.citydata', ['data' => $data]);
+        if ($name != " ") {
+            $data = City::where('city', 'LIKE', "%$name%")->paginate(5);
+        } else {
+            $data = City::paginate(5);
+        }
+        return view('backend.City.citydata')->with('data', $data)
+        ->with('totalcontact',$totalcontact)
+        ->with('contactdata',$contactdata);
     }
 
 
@@ -63,10 +77,17 @@ class CityController extends Controller
 
     }
     public function cityUpdate($city){
+        //Alert Notification
+        $today = Carbon::today();
+        $totalcontact = Contact::whereDate('created_at', $today)->count();
+        $contactdata = Contact::all();
+        //
         $city = City::where('city', $city)->first();
         $id = $city->id;
         $data = City::where('id',$id)->first();
-        return view('backend.city.updateCity',['data' => $data]);
+        return view('backend.city.updateCity')->with('data', $data)
+        ->with('totalcontact',$totalcontact)
+        ->with('contactdata',$contactdata);
     }
     public function updated(Request $req, $city){
         $req->validate([
