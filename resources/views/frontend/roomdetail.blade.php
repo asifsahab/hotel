@@ -10,9 +10,9 @@
             <!-- Spinner Start -->
             <div id="spinner"
                 class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
-                <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
-                    <span class="sr-only">Loading...</span>
-                </div>
+                <!-- Replace 'path/to/spinner.gif' with the actual path to your GIF file -->
+                <img src="https://media2.giphy.com/media/I56huqDSNXmW3kIcXv/giphy.gif?cid=6c09b952fdgpglrq3mnwkghdtbybvoy2e90jghs3bidhsw13&ep=v1_stickers_related&rid=giphy.gif&ct=s"
+                    alt="Loading..." class="img-fluid">
             </div>
             <!-- Spinner End -->
 
@@ -43,7 +43,7 @@
                         <h1 class="mb-5">Explore Our Room <span class="text-primary text-uppercase">Detail</span></h1>
                     </div>
                     <div class="row">
-                        @if(isset($room))
+                        @if (isset($room))
                             <!-- Large Image and Room Details -->
                             <div class="col-md-6">
 
@@ -51,7 +51,8 @@
 
 
                                 <h2 class="mb-3">{{ $room->hotelname }}</h2>
-                                <img src="{{ asset('storage/images/' . $room->image) }}" alt="{{ $room->name }}" class="img-fluid mb-4">
+                                <img src="{{ asset('storage/images/' . $room->image) }}" alt="{{ $room->name }}"
+                                    class="img-fluid mb-4">
                             </div>
                             <div class="col-md-6">
                                 <div class="d-flex justify-content-between align-items-center mb-3">
@@ -60,9 +61,9 @@
                                     </p>
                                     <h1>
 
-                                        @if($room->status == 0)
-                                            <b class="text-light bg-danger" >Un-Available</b>
-                                            @endif
+                                        @if ($room->status == 0)
+                                            <b class="text-light bg-danger">Un-Available</b>
+                                        @endif
 
                                     </h1>
 
@@ -72,7 +73,8 @@
                                 </div>
                                 <a href=""><i class="bi bi-geo-alt-fill"></i> {{ $room->address }}</a><br>
                                 <p class="lead mb-3">
-                                    <i class="bi bi-door-open-fill"></i> {{ $room->room }} - <i class="bi bi-person-fill"></i> {{ $room->person }}
+                                    <i class="bi bi-door-open-fill"></i> {{ $room->room }} - <i
+                                        class="bi bi-person-fill"></i> {{ $room->person }}
                                 </p>
 
                                 <p class="lead mb-3">
@@ -88,37 +90,38 @@
                                     <i class="bi bi-currency-dollar"></i> RS{{ $room->price }}/-
                                 </p>
                                 <!-- Add other room details here -->
-                               <div class="d-flex justify-content-between">
-                                @if($room->status == 1)
-                                <a class="btn btn-sm btn-primary rounded py-2 px-4"
-                                            href="{{route('roombooking', $room->hotelname)}}">Book
-                                                Now</a>
-@else
-<a class="btn btn-sm btn-primary disabled rounded py-2 px-4"
-                                            href="{{route('roombooking', $room->hotelname)}}">Book
-                                                Now</a>
-                                                @endif
-                                        </div>
+                                <div class="d-flex justify-content-between">
+                                    @if ($room->status == 1)
+                                        <a class="btn btn-sm btn-primary rounded py-2 px-4"
+                                            href="{{ route('roombooking', $room->hotelname) }}">Book
+                                            Now</a>
+                                    @else
+                                        <a class="btn btn-sm btn-primary disabled rounded py-2 px-4"
+                                            href="{{ route('roombooking', $room->hotelname) }}">Book
+                                            Now</a>
+                                    @endif
+                                </div>
                             </div>
                         @endif
                     </div>
 
-            </div>
-            <!-- Room End -->
-
-
-
-            <!-- Newsletter Start -->
-            <div class="container newsletter mt-5 wow fadeIn" data-wow-delay="0.1s">
-                <div class="container-xxl py-5">
-
                 </div>
-            </div>
-            <!-- Newsletter Start -->
+                <!-- Room End -->
 
-            <!-- Back to Top -->
-            <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
-        </div>
+
+
+                <!-- Newsletter Start -->
+                <div class="container newsletter mt-5 wow fadeIn" data-wow-delay="0.1s">
+                    <div class="container-xxl py-5">
+
+                    </div>
+                </div>
+                <!-- Newsletter Start -->
+
+                <!-- Back to Top -->
+                <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i
+                        class="bi bi-arrow-up"></i></a>
+            </div>
 
     </body>
 

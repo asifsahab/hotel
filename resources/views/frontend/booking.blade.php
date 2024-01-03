@@ -10,9 +10,9 @@
             <!-- Spinner Start -->
             <div id="spinner"
                 class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
-                <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
-                    <span class="sr-only">Loading...</span>
-                </div>
+                <!-- Replace 'path/to/spinner.gif' with the actual path to your GIF file -->
+                <img src="https://media2.giphy.com/media/I56huqDSNXmW3kIcXv/giphy.gif?cid=6c09b952fdgpglrq3mnwkghdtbybvoy2e90jghs3bidhsw13&ep=v1_stickers_related&rid=giphy.gif&ct=s"
+                    alt="Loading..." class="img-fluid">
             </div>
             <!-- Spinner End -->
 
@@ -68,8 +68,8 @@
                         </div>
                         <div class="col-lg-6">
                             <div class="wow fadeInUp" data-wow-delay="0.2s">
-                                <form action="{{route('bookingsubmit')}}" method="post">
-@csrf
+                                <form action="{{ route('bookingsubmit') }}" method="post">
+                                    @csrf
                                     <div class="row g-3">
                                         <div class="col-md-6">
                                             <div class="form-floating">
@@ -78,18 +78,18 @@
                                                 <label for="hotelname">Hotel Name</label>
                                             </div>
                                             @error('hotelname')
-                                            <span class="text-danger">{{$message}}</span>
+                                                <span class="text-danger">{{ $message }}</span>
                                             @enderror
 
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-floating">
                                                 <input type="text" name="price" class="form-control" id="price"
-                                                    placeholder="Your price" readonly value="{{$room->price }}">
+                                                    placeholder="Your price" readonly value="{{ $room->price }}">
                                                 <label for="price">Price</label>
                                             </div>
                                             @error('hotelname')
-                                            <span class="text-danger">{{$message}}</span>
+                                                <span class="text-danger">{{ $message }}</span>
                                             @enderror
 
                                         </div>
@@ -99,7 +99,7 @@
                                                     placeholder="Your Name">
                                                 <label for="name">Your Name</label>
                                                 @error('name')
-                                                <span class="text-danger">{{$message}}</span>
+                                                    <span class="text-danger">{{ $message }}</span>
                                                 @enderror
                                             </div>
 
@@ -111,54 +111,60 @@
                                                 <label for="email">Your Email</label>
                                             </div>
                                             @error('email')
-                                                <span class="text-danger">{{$message}}</span>
+                                                <span class="text-danger">{{ $message }}</span>
                                             @enderror
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-floating date" id="date3" data-target-input="nearest">
-                                                <input type="date" name="checkin" class="form-control datetimepicker-input"
-                                                    id="checkin" placeholder="Check In" />
+                                                <input type="date" name="checkin"
+                                                    class="form-control datetimepicker-input" id="checkin"
+                                                    placeholder="Check In" />
                                                 <label for="checkin">Check-In</label>
                                                 @error('checkin')
-                                                <span class="text-danger">{{$message}}</span>
+                                                    <span class="text-danger">{{ $message }}</span>
                                                 @enderror
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-floating date" id="date4" data-target-input="nearest">
-                                                <input type="date" name="checkout" class="form-control datetimepicker-input"
-                                                    id="checkout" placeholder="Check Out" />
+                                                <input type="date" name="checkout"
+                                                    class="form-control datetimepicker-input" id="checkout"
+                                                    placeholder="Check Out" />
                                                 <label for="checkout">Check-out</label>
                                                 @error('checkout')
-                                                <span class="text-danger">{{$message}}</span>
+                                                    <span class="text-danger">{{ $message }}</span>
                                                 @enderror
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-floating">
                                                 <input type="text" class="form-control" id="city"
-                                                    placeholder="Your city" name="city" readonly value="{{ $room->city->city }}">
+                                                    placeholder="Your city" name="city" readonly
+                                                    value="{{ $room->city->city }}">
                                                 <label for="city">city</label>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-floating">
                                                 <input type="text" class="form-control" id="category"
-                                                    placeholder="Your category" name="category" readonly value="{{ $room->category->name }}">
+                                                    placeholder="Your category" name="category" readonly
+                                                    value="{{ $room->category->name }}">
                                                 <label for="category">category</label>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-floating">
                                                 <input type="text" class="form-control" id="person"
-                                                    placeholder="Your person" name="person" readonly value="{{ $room->person }}">
+                                                    placeholder="Your person" name="person" readonly
+                                                    value="{{ $room->person }}">
                                                 <label for="person">Person</label>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-floating">
                                                 <input type="text" class="form-control" id="room"
-                                                    placeholder="Your room" name="room" readonly value="{{ $room->room }}">
+                                                    placeholder="Your room" name="room" readonly
+                                                    value="{{ $room->room }}">
                                                 <label for="room">room</label>
                                             </div>
                                         </div>

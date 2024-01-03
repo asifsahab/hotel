@@ -50,7 +50,7 @@
 <body>
     <div class="error-container">
         <h1>404</h1>
-        <p>Page Not Found BB</p>
+        <p>Page Not Found</p>
         <a href="{{ route('index') }}" class="btn-back">Back to Home</a>
     </div>
 </body>
