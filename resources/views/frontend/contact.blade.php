@@ -35,22 +35,16 @@
             </div>
             <!-- Page Header End -->
             @if (session('success'))
-                <!-- Include SweetAlert2 CSS and JS from CDN -->
-
-
-                <!-- Display SweetAlert when there is a success message in the session -->
-                <script>
-                    document.addEventListener('DOMContentLoaded', function() {
-                        Swal.fire({
-                            title: "Success",
-                            text: "{{ session('success') }}",
-                            icon: "success"
-                        });
+            <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    Swal.fire({
+                        title: "Success",
+                        text: "{{ session('success') }}",
+                        icon: "success"
                     });
-                </script>
-            @endif
-
-
+                });
+            </script>
+        @endif
 
             <!-- Contact Start -->
             <div class="container-xxl py-5">

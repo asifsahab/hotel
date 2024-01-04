@@ -57,7 +57,8 @@
 
                                         @if (isset($city))
                                             @foreach ($city as $cityname)
-                                                <option value="{{ $cityname->id }}" @if(isset($data->city_id) && $data->city_id == $cityname->id) selected @endif>
+                                                <option value="{{ $cityname->id }}"
+                                                    @if (isset($data->city_id) && $data->city_id == $cityname->id) selected @endif>
                                                     {{ $cityname->city }}
                                                 </option>
                                             @endforeach
@@ -74,11 +75,12 @@
                                     <label for="exampleInputEmail1">Select Category</label>
                                     <select class="form-control" name="category">
                                         @if (isset($category))
-                                        @foreach ($category as $category)
-                                        <option value="{{ $category->id }}" @if( $data->category_id == $category->id) selected @endif>
-                                            {{ $category->name }}
-                                        </option>
-                                        @endforeach
+                                            @foreach ($category as $category)
+                                                <option value="{{ $category->id }}"
+                                                    @if ($data->category_id == $category->id) selected @endif>
+                                                    {{ $category->name }}
+                                                </option>
+                                            @endforeach
                                         @endif
                                     </select>
                                     @error('category')
@@ -135,7 +137,7 @@
                                     <div class="date">
                                         <label for="checkin">Availablity Check IN</label>
                                         <input type="date" name="checkin" class="form-control" placeholder="Check In"
-                                        value="{{ $data->checkin }}" />
+                                            value="{{ $data->checkin }}" />
                                     </div>
                                     @error('checkin')
                                         <span class="text-danger">{{ $message }}</span>
@@ -147,7 +149,7 @@
                                     <div class="date">
                                         <label for="checkout">Availability Check Out</label>
                                         <input type="date" name="checkout" class="form-control" placeholder="Check Out"
-                                        value="{{ $data->checkout }}" />
+                                            value="{{ $data->checkout }}" />
                                     </div>
                                     @error('checkout')
                                         <span class="text-danger">{{ $message }}</span>
@@ -175,10 +177,28 @@
                         </div>
 
                         <div class="form-group">
+                            <label for="exampleInputEmail1">Select Status</label>
+                            <select class="form-control" name="status">
+                                @if ($data->status == 1)
+                                    <option value="{{$data->status}}" selected>Available</option>
+                                    <option value="0">Unavailable</option>
+                                @endif
+                                @if ($data->status == 0)
+                                    <option value="1">Available</option>
+                                    <option value="{{$data->status}}" selected>Un-Available</option>
+                                @endif
+                            </select>
+                            @error('status')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+
+
+                        <div class="form-group">
                             <label for="exampleInputFile">Choose an image file:</label>
                             <div class="custom-file">
-                                <input type="file" value="{{ $data->image }}" class="custom-file-input" name="image" id="exampleInputFile"
-                                    accept="image/*">
+                                <input type="file" value="{{ $data->image }}" class="custom-file-input"
+                                    name="image" id="exampleInputFile" accept="image/*">
                                 <label class="custom-file-label" for="exampleInputFile">Choose file</label>
                             </div>
                             @error('image')

@@ -63,9 +63,9 @@
                     <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                         <!-- Display the first 4 notifications in descending order of creation -->
                         @if (isset($contactdata) && count($contactdata) > 0)
-                            @foreach ($contactdata->sortByDesc('created_at')->take(4) as $contact)
+                            @foreach ($contactdata->sortByDesc('created_at')->take(3) as $contact)
                                 <div class="dropdown-item">
-                                    <a href="{{ route('contact') }}">
+                                    <a href="{{ route('contactview') }}">
                                         <i class="fas fa-envelope mr-2"></i>{{ $contact->name }}
                                         <span
                                             class="float-right text-muted text-md">{{ $contact->created_at->shortRelativeDiffForHumans() }}</span>
@@ -74,10 +74,10 @@
                             @endforeach
 
                             <!-- Check if there are more than 4 items -->
-                            @if (count($contactdata) > 4)
+                            @if (count($contactdata) > 3)
                                 <div class="dropdown-divider"></div>
                                 <div class="dropdown-item">
-                                    <a href="{{ route('contact') }}">See More</a>
+                                    <a href="{{ route('contactview') }}">See More</a>
                                 </div>
                             @endif
                         @else

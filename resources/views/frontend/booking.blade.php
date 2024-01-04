@@ -40,6 +40,7 @@
 
             <!-- Booking Start -->
             <div class="container-xxl py-5">
+                @if (isset($room))
                 <div class="container">
                     <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
                         <h6 class="section-title text-center text-primary text-uppercase">Room Booking</h6>
@@ -48,22 +49,22 @@
                     <div class="row g-5">
                         <div class="col-lg-6">
                             <div class="row g-3">
-                                <div class="col-6 text-end">
-                                    <img class="img-fluid rounded w-75 wow zoomIn" data-wow-delay="0.1s"
-                                        src="{{ asset('storage/images/' . $room->image) }}" style="margin-top: 25%;">
-                                </div>
-                                <div class="col-6 text-start">
-                                    <img class="img-fluid rounded w-100 wow zoomIn" data-wow-delay="0.3s"
-                                        src="{{ asset('storage/images/' . $room->image) }}">
-                                </div>
-                                <div class="col-6 text-end">
-                                    <img class="img-fluid rounded w-50 wow zoomIn" data-wow-delay="0.5s"
-                                        src="{{ asset('storage/images/' . $room->image) }}">
-                                </div>
-                                <div class="col-6 text-start">
-                                    <img class="img-fluid rounded w-75 wow zoomIn" data-wow-delay="0.7s"
-                                        src="{{ asset('storage/images/' . $room->image) }}">
-                                </div>
+                                    <div class="col-6 text-end">
+                                        <img class="img-fluid rounded w-75 wow zoomIn" data-wow-delay="0.1s"
+                                            src="{{ asset('storage/images/' . $room->image) }}" style="margin-top: 25%;">
+                                    </div>
+                                    <div class="col-6 text-start">
+                                        <img class="img-fluid rounded w-100 wow zoomIn" data-wow-delay="0.3s"
+                                            src="{{ asset('storage/images/' . $room->image) }}">
+                                    </div>
+                                    <div class="col-6 text-end">
+                                        <img class="img-fluid rounded w-50 wow zoomIn" data-wow-delay="0.5s"
+                                            src="{{ asset('storage/images/' . $room->image) }}">
+                                    </div>
+                                    <div class="col-6 text-start">
+                                        <img class="img-fluid rounded w-75 wow zoomIn" data-wow-delay="0.7s"
+                                            src="{{ asset('storage/images/' . $room->image) }}">
+                                    </div>
                             </div>
                         </div>
                         <div class="col-lg-6">
@@ -183,6 +184,7 @@
                         </div>
                     </div>
                 </div>
+                @endif
             </div>
             <!-- Booking End -->
 

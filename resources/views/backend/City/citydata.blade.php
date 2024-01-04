@@ -33,18 +33,16 @@
         @endif
 
         @if (session('success'))
-            
-                <!-- Display SweetAlert when there is a success message in the session -->
-                <script>
-                    document.addEventListener('DOMContentLoaded', function() {
-                        Swal.fire({
-                            title: "Success",
-                            text: "{{ session('success') }}",
-                            icon: "success"
-                        });
+            <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    Swal.fire({
+                        title: "Success",
+                        text: "{{ session('success') }}",
+                        icon: "success"
                     });
-                </script>
-            @endif
+                });
+            </script>
+        @endif
         <section class="content">
             <div class="container-fluid">
                 <div class="row">
@@ -88,11 +86,11 @@
                                                 </td>
                                             </tr>
                                         @endforeach
-                                    </tbody>
+                                        </tbody>
                                 </table>
 
-                                @if(isset($data))
-                                {{ $data->links('pagination::bootstrap-5') }}
+                                @if (isset($data))
+                                    {{ $data->links('pagination::bootstrap-5') }}
                                 @endif
                             </div>
                         </div>

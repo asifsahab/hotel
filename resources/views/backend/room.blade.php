@@ -24,16 +24,16 @@
         </section>
 
         @if (session('success'))
-            <div id="alertSuccess" class="alert alert-info alert-dismissible fade show text-center" role="alert">
-                <strong>{{ session('success') }}</strong>
-            </div>
             <script>
-                setTimeout(function() {
-                    $('#alertSuccess').alert('close');
-                }, 3000);
+                document.addEventListener('DOMContentLoaded', function() {
+                    Swal.fire({
+                        title: "Success",
+                        text: "{{ session('success') }}",
+                        icon: "success"
+                    });
+                });
             </script>
         @endif
-
 
         <div class="offset-3 col-md-6">
             <!-- general form elements -->

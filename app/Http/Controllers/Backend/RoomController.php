@@ -171,6 +171,7 @@ class RoomController extends Controller
                     'checkin' => $req->checkin,
                     'checkout' => $req->checkout,
                     'address' => $req->address,
+                    'status' => $req->status,
                     'description' => $req->description,
 
                 ]

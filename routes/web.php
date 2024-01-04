@@ -56,7 +56,7 @@ Route::get('/category/delete/{name}', 'categoryDelete')->name('categorydelete');
 Route::get('/category/update/{name}',  'categoryUpdate')->name('categoryupdate');
 Route::post('/category/updated{name}',  'updated')->name('categoryupdated');
 });
-Route::get('/contact/view', [ContactController::class, 'contactview'])->name('contactview');
+Route::get('/contat/view', [ContactController::class, 'contactView'])->name('contactview');
 
 
 // Room Routes:

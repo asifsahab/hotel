@@ -23,9 +23,9 @@ class ContactController extends Controller
 
     }
 
-    public function contactview()
+    public function contactView()
     {
-        $contact = Contact::all();
-       dd($contact);
+        $data = Contact::all();
+        return view('backend.contactview')->with('data', $data);
     }
 }
