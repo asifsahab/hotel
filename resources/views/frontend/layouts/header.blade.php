@@ -75,8 +75,7 @@
                                         class="bi bi-house-door"></i> Home</a>
                                 <a href="{{ route('about') }}" class="nav-item nav-link"><i
                                         class="bi bi-info-circle"></i> About</a>
-                                <a href="{{ route('booking') }}" class="nav-item nav-link"><i
-                                        class="bi bi-calendar"></i> Booking</a>
+                               
                                 <a href="{{ route('room') }}" class="nav-item nav-link"><i
                                         class="bi bi-door-closed"></i> Rooms</a>
                                 <a href="{{ route('service') }}" class="nav-item nav-link"><i class="bi bi-gear"></i>

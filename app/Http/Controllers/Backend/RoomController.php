@@ -11,6 +11,8 @@ use App\Models\Contact;
 use Carbon\Carbon;
 use App\Http\Requests\RoomValidation;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
+
 
 class RoomController extends Controller
 {
@@ -101,6 +103,12 @@ class RoomController extends Controller
         $room = Room::where('hotelname', $hotelname)->first();
         $id = $room->id;
         $data = Room::where('id',$id)->first();
+
+        $imagePath= public_path('storage/images/'. $data->image);
+        if(file_exists($imagePath))
+        {
+           unlink($imagePath);
+        }
         if ($data) {
 
             $data->delete();

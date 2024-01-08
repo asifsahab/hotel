@@ -56,7 +56,9 @@ Route::get('/category/delete/{name}', 'categoryDelete')->name('categorydelete');
 Route::get('/category/update/{name}',  'categoryUpdate')->name('categoryupdate');
 Route::post('/category/updated{name}',  'updated')->name('categoryupdated');
 });
+
 Route::get('/contat/view', [ContactController::class, 'contactView'])->name('contactview');
+Route::get('/booking/view',[BookingController::class,'bookingView'])->name('bookingview');
 
 
 // Room Routes:
@@ -89,7 +91,7 @@ Route::post('/contat/submit', [ContactController::class, 'contactsubmit'])->name
 
 Route::post('/sreach', [RoomController::class, 'search'])->name('search');
 
-Route::post('booking/submit',[BookingController::class,'bookingsubmit'])->name('bookingsubmit');
+Route::post('/booking/submit',[BookingController::class,'bookingsubmit'])->name('bookingsubmit');
 
 
 

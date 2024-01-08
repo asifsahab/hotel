@@ -180,20 +180,19 @@
                             <label for="exampleInputEmail1">Select Status</label>
                             <select class="form-control" name="status">
                                 @if ($data->status == 1)
-                                    <option value="{{$data->status}}" selected>Available</option>
+                                    <option value="{{ $data->status }}" selected>Available</option>
                                     <option value="0">Unavailable</option>
                                 @endif
                                 @if ($data->status == 0)
                                     <option value="1">Available</option>
-                                    <option value="{{$data->status}}" selected>Un-Available</option>
+                                    <option value="{{ $data->status }}" selected>Un-Available</option>
                                 @endif
                             </select>
                             @error('status')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
-
-
+                        
                         <div class="form-group">
                             <label for="exampleInputFile">Choose an image file:</label>
                             <div class="custom-file">

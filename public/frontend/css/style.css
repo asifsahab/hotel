@@ -499,8 +499,7 @@
 }
 .cookie-consent-banner {
     position: fixed;
-    bottom: 0;
-    left: 0;
+    bottom: 10px;
     width: 100%;
     background-color: #222;
     color: #fff;

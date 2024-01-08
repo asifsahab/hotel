@@ -63,7 +63,13 @@ class BookingController extends Controller
         $hotelname->save();
 
 
-        return redirect()->back()->with('success', 'Booking is okay');
+        return redirect()->back()->with('success', 'congratulation for Booking');
+    }
+
+    public function bookingView()
+    {
+        $data = Booking::all();
+        return view('backend.bookingview')->with('data', $data);
     }
 
 }

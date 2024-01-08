@@ -61,7 +61,7 @@
                     </a>
                     <!-- Add your notification dropdown content here -->
                     <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                        <!-- Display the first 4 notifications in descending order of creation -->
+                        <!-- Display the first 3 notifications in descending order of creation -->
                         @if (isset($contactdata) && count($contactdata) > 0)
                             @foreach ($contactdata->sortByDesc('created_at')->take(3) as $contact)
                                 <div class="dropdown-item">
@@ -73,7 +73,7 @@
                                 </div>
                             @endforeach
 
-                            <!-- Check if there are more than 4 items -->
+                            <!-- Check if there are more than 3 items -->
                             @if (count($contactdata) > 3)
                                 <div class="dropdown-divider"></div>
                                 <div class="dropdown-item">
@@ -167,24 +167,17 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="{{ route('roomregister') }}" class="nav-link">
+                                    <a href="{{ route('bookingview') }}" class="nav-link">
 
                                         <p>Already Booked</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{ route('roomregister') }}" class="nav-link">
+                                    <a href="{{ route('bookingview') }}" class="nav-link">
 
                                         <p>New Booking</p>
                                     </a>
                                 </li>
-                                <li class="nav-item">
-                                    <a href="{{ route('roomregister') }}" class="nav-link">
-
-                                        <p>User Registers</p>
-                                    </a>
-                                </li>
-
 
                             </ul>
                         </li>

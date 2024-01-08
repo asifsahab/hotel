@@ -45,7 +45,9 @@ public function roombooking(Request $request,$hotelname)
         return view('frontend.about');
     }
     public function booking(){
-        return view('frontend.booking');
+        $room = Room::all();
+        return view('frontend.room')
+        ->with('room', $room);
     }
     public function contact(){
         return view('frontend.contact');

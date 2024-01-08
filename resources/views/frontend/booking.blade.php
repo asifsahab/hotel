@@ -7,14 +7,6 @@
 
     <body>
         <div class="container-xxl bg-white p-0">
-            <!-- Spinner Start -->
-            <div id="spinner"
-                class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
-                <!-- Replace 'path/to/spinner.gif' with the actual path to your GIF file -->
-                <img src="https://media2.giphy.com/media/I56huqDSNXmW3kIcXv/giphy.gif?cid=6c09b952fdgpglrq3mnwkghdtbybvoy2e90jghs3bidhsw13&ep=v1_stickers_related&rid=giphy.gif&ct=s"
-                    alt="Loading..." class="img-fluid">
-            </div>
-            <!-- Spinner End -->
 
             <!-- Page Header Start -->
             <div class="container-fluid page-header mb-5 p-0"
@@ -34,9 +26,17 @@
             </div>
             <!-- Page Header End -->
 
-
-
-
+            @if (session('success'))
+            <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    Swal.fire({
+                        title: "Success",
+                        text: "{{ session('success') }}",
+                        icon: "success"
+                    });
+                });
+            </script>
+        @endif
 
             <!-- Booking Start -->
             <div class="container-xxl py-5">
