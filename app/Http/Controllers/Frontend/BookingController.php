@@ -1,9 +1,10 @@
 <?php
 
 namespace App\Http\Controllers\Frontend;
+
 use App\Http\Controllers\Controller;
-use App\Models\Room;
 use App\Models\Booking;
+use App\Models\Room;
 use Illuminate\Http\Request;
 
 class BookingController extends Controller
@@ -16,18 +17,17 @@ class BookingController extends Controller
             return redirect()->back()->with('error', 'Room not found');
         }
 
-        $checkin = $hotelname->checkin;
-        $checkout = $hotelname->checkout;
+        $checkin = new \DateTime($hotelname->checkin);
+        $checkout = new \DateTime($hotelname->checkout);
 
-
-
+        $totalDays = $checkin->diff($checkout)->days;
 
         $request->validate([
             'checkin' => [
                 'required',
                 'date',
                 function ($attribute, $value, $fail) use ($checkin) {
-                    if (strtotime($value) < strtotime($checkin)) {
+                    if (strtotime($value) < $checkin->getTimestamp()) {
                         $fail('The check-in date must be greater than or equal to the room\'s check-in date.');
                     }
                 },
@@ -36,34 +36,47 @@ class BookingController extends Controller
                 'required',
                 'date',
                 function ($attribute, $value, $fail) use ($checkout) {
-                    if (strtotime($value) > strtotime($checkout)) {
+                    if (strtotime($value) > $checkout->getTimestamp()) {
                         $fail('The check-out date must be less than or equal to the room\'s check-out date.');
                     }
                 },
             ],
-            'name'=>'required',
-            'email'=>'required',
+            'name' => 'required',
+            'email' => 'required',
         ]);
 
-        $bookingdata = new Booking;
-        $bookingdata->hotelname = $request->input('hotelname');
-        $bookingdata->price = $request->input('price');
-        $bookingdata->name = $request->input('name');
-        $bookingdata->email = $request->input('email');
-        $bookingdata->checkin = $request->input('checkin');
-        $bookingdata->checkout = $request->input('checkout');
-        $bookingdata->city = $request->input('city');
-        $bookingdata->category = $request->input('category');
-        $bookingdata->person = $request->input('person');
-        $bookingdata->room = $request->input('room');
-        $bookingdata->request = $request->input('request');
-        $bookingdata->save();
+        $userCheckin = new \DateTime($request->checkin);
+        $userCheckout = new \DateTime($request->checkout);
 
-        $hotelname->status =0;
-        $hotelname->save();
+        $userTotalDays = $userCheckin->diff($userCheckout)->days;
 
+        $bookingData = new Booking;
+        $bookingData->hotelname = $request->input('hotelname');
+        $bookingData->price = $request->input('price');
+        $bookingData->name = $request->input('name');
+        $bookingData->email = $request->input('email');
+        $bookingData->checkin = $request->input('checkin');
+        $bookingData->checkout = $request->input('checkout');
+        $bookingData->city = $request->input('city');
+        $bookingData->category = $request->input('category');
+        $bookingData->person = $request->input('person');
+        $bookingData->room = $request->input('room');
+        $bookingData->request = $request->input('request');
 
-        return redirect()->back()->with('success', 'congratulation for Booking');
+        $bookingData->save();
+
+        if ($userTotalDays == $totalDays) {
+
+            $hotelname->status = 0;
+
+            $hotelname->save();
+        } else {
+            $hotelname->checkin = $userCheckout->modify('+1 day')->format('Y-m-d');
+            $hotelname->checkout = $checkout->format('Y-m-d');
+            $hotelname->save();
+        }
+
+        return redirect()->back()->with('success', 'Booking is okay');
     }
 
     public function bookingView()

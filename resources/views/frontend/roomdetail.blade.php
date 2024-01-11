@@ -72,12 +72,14 @@
                                 <p class="lead mb-3">
                                     <i class="bi bi-info-circle-fill"></i> {{ $room->description }}
                                 </p>
-                                <p class="lead mb-3">
-                                    <i class="bi bi-clock-fill"></i> Check-in: {{ $room->checkin }}
-                                </p>
-                                <p class="lead mb-3">
-                                    <i class="bi bi-clock-fill"></i> Check-out: {{ $room->checkout }}
-                                </p>
+                                @if ($room->status == 1)
+                                    <p class="lead mb-3">
+                                        <i class="bi bi-clock-fill"></i> Check-in: {{ $room->checkin }}
+                                    </p>
+                                    <p class="lead mb-3">
+                                        <i class="bi bi-clock-fill"></i> Check-out: {{ $room->checkout }}
+                                    </p>
+                                @endif
                                 <p class="text-primary h3">
                                     <i class="bi bi-currency-dollar"></i> RS{{ $room->price }}/-
                                 </p>
