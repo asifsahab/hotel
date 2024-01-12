@@ -7,7 +7,7 @@
 
     <body>
         <div class="container-xxl bg-white p-0">
-        
+
             <div id="cookieConsent" class="cookie-consent-banner">
                 <div class="container">
                     <div class="row align-items-center">
@@ -43,7 +43,7 @@
                                     <h6 class="section-title text-white text-uppercase mb-3 animated slideInDown">Luxury
                                         Living</h6>
                                     <h1 class="display-3 text-white mb-4 animated slideInDown">Discover A Brand Luxurious
-                                        Hotels</h1>
+                                        Rooms</h1>
                                     <a href="{{ route('room') }}"
                                         class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">Our Rooms</a>
                                     <a href="{{ route('booking') }}"
@@ -58,7 +58,7 @@
                                     <h6 class="section-title text-white text-uppercase mb-3 animated slideInDown">Luxury
                                         Living</h6>
                                     <h1 class="display-3 text-white mb-4 animated slideInDown">Discover A Brand Luxurious
-                                        Hotels</h1>
+                                        Rooms</h1>
                                     <a href="{{ route('room') }}"
                                         class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">Our Rooms</a>
                                     <a href="{{ route('booking') }}"
@@ -92,7 +92,7 @@
                                 <div class="col-md-10 ">
                                     <div class="row g-2">
 
-                                        <div class="col-md-4">
+                                        <div class="col-md-6">
                                             <select name="city" class="form-select">
                                                 <option selected disabled>Select Destination</option>
                                                 @if (isset($city))
@@ -102,17 +102,14 @@
                                                 @endif
                                             </select>
                                         </div>
-                                        <div class="col-md-4">
-                                            <input type="number" placeholder="Enter Persons" class="form-control"
-                                                name="persons">
-                                        </div>
-                                        <div class="col-md-4">
+
+                                        <div class="col-md-6">
                                             <input type="number" name="enterroom" id="quantity" class="form-control"
                                                 placeholder="Enter Room">
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-md-4 mt-2">
+                                        <div class="col-md-6 mt-2">
                                             <div class="date">
                                                 <input type="date" name="checkin" class="form-control"
                                                     placeholder="Check In" />
@@ -120,7 +117,7 @@
                                             <small class="text-muted">Check-In</small>
                                         </div>
 
-                                        <div class="col-md-4 mt-2">
+                                        <div class="col-md-6 mt-2">
                                             <div class="date">
                                                 <input type="date" name="checkout" class="form-control"
                                                     placeholder="Check Out" />
@@ -255,9 +252,17 @@
                                     </div>
                                     <p class="text-body mb-3">{{ $roomdata->description }}</p>
                                     <div class="d-flex justify-content-between">
-                                        <a class="btn btn-sm btn-primary rounded py-2 px-4" href="">View
+                                        <a class="btn btn-sm btn-primary rounded py-2 px-4"
+                                            href="{{ route('detailroom', str_replace(' ', '-', $roomdata->hotelname)) }}">View
                                             Detail</a>
-                                        <a class="btn btn-sm btn-dark rounded py-2 px-4" href="">Book Now</a>
+                                        @if ($roomdata->status == 1)
+                                            <a class="btn btn-sm btn-dark rounded py-2 px-4"
+                                                href="{{ route('roombooking', str_replace(' ', '-', $roomdata->hotelname)) }}">Book
+                                                Now</a>
+                                        @else
+                                            <a class="btn btn-sm btn-dark disabled rounded py-2 px-4"
+                                                href="{{ route('roombooking', $roomdata->hotelname) }}">Book Now</a>
+                                        @endif
                                     </div>
                                 </div>
                             </div>

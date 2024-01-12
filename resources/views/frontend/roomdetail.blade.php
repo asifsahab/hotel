@@ -38,10 +38,6 @@
                         @if (isset($room))
                             <!-- Large Image and Room Details -->
                             <div class="col-md-6">
-
-
-
-
                                 <h2 class="mb-3">{{ $room->hotelname }}</h2>
                                 <img src="{{ asset('storage/images/' . $room->image) }}" alt="{{ $room->name }}"
                                     class="img-fluid mb-4">

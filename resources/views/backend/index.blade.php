@@ -76,7 +76,7 @@
                         <!-- small box -->
                         <div class="small-box bg-danger">
                             <div class="inner">
-                                <h3>55</h3>
+                                <h3>{{ $booking }}<sup style="font-size: 20px"></sup></h3>
 
                                 <p>Total Bookings</p>
                             </div>

@@ -76,7 +76,7 @@ class BookingController extends Controller
             $hotelname->save();
         }
 
-        return redirect()->back()->with('success', 'Booking is okay');
+        return redirect()->back()->with('success', 'Booking is Done');
     }
 
     public function bookingView()
