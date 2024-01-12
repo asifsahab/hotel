@@ -3,67 +3,76 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Models\City;
-use App\Models\Area;
 use App\Models\Room;
+use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-    public function index(){
+    public function index()
+    {
 
         $city = City::all();
         $room = Room::latest()->take(3)->get();
         $totalroom = Room::count();
 
         return view('frontend.index')
-        ->with('city',$city)
-        ->with('totalroom',$totalroom)
-        ->with('room',$room);
+            ->with('city', $city)
+            ->with('totalroom', $totalroom)
+            ->with('room', $room);
 
     }
 
-public function roomdetail(Request $request,$hotelname)
-{
-    $hotelname2 = $hotelname;
-    $room = Room::where('hotelname', $hotelname2)->first();
+    public function roomdetail(Request $request, $hotelname)
+    {
 
-    return view('frontend.roomdetail')
-    ->with('room',$room);
+        $hotelname2 = str_replace("-", " ", $hotelname);
 
-}
-public function roombooking(Request $request,$hotelname)
-{
-    $hotelname2 = $hotelname;
-    $room = Room::where('hotelname', $hotelname2)->first();
+        $room = Room::where('hotelname', $hotelname2)->first();
 
-    return view('frontend.booking')
-    ->with('room',$room);
+        return view('frontend.roomdetail')
+            ->with('room', $room);
 
-}
-    public function about(){
+    }
+    public function roombooking(Request $request, $hotelname)
+    {
+        $hotelname2 = $hotelname;
+        $room = Room::where('hotelname', $hotelname2)->first();
+
+        return view('frontend.booking')
+            ->with('room', $room);
+
+    }
+    public function about()
+    {
         return view('frontend.about');
     }
-    public function booking(){
+    public function booking()
+    {
         $room = Room::all();
         return view('frontend.room')
-        ->with('room', $room);
+            ->with('room', $room);
     }
-    public function contact(){
+    public function contact()
+    {
         return view('frontend.contact');
     }
-    public function room(){
+    public function room()
+    {
         $room = Room::all();
         return view('frontend.room')
-        ->with('room', $room);
+            ->with('room', $room);
     }
-    public function service(){
+    public function service()
+    {
         return view('frontend.service');
     }
-    public function team(){
+    public function team()
+    {
         return view('frontend.team');
     }
-    public function testimonial(){
+    public function testimonial()
+    {
         return view('frontend.testimonial');
     }
 }
