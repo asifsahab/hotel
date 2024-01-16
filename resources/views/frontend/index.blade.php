@@ -93,7 +93,7 @@
                                     <div class="row g-2">
 
                                         <div class="col-md-6">
-                                            <select name="city" class="form-select">
+                                            <select name="city" class="form-select @error('city') is-invalid @enderror" >
                                                 <option selected disabled>Select Destination</option>
                                                 @if (isset($city))
                                                     @foreach ($city as $cityname)
@@ -101,28 +101,23 @@
                                                     @endforeach
                                                 @endif
                                             </select>
+                                            <span class="text-danger">
+                                                @error('city')
+                                                {{$message}}
+                                                @enderror
+                                            </span>
                                         </div>
 
                                         <div class="col-md-6">
-                                            <input type="number" name="enterroom" id="quantity" class="form-control"
-                                                placeholder="Enter Room">
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-6 mt-2">
-                                            <div class="date">
-                                                <input type="date" name="checkin" class="form-control"
-                                                    placeholder="Check In" />
-                                            </div>
-                                            <small class="text-muted">Check-In</small>
-                                        </div>
+                                            <select name="category" class="form-select ">
+                                                <option selected disabled>Select Category</option>
+                                                @if (isset($category))
+                                                    @foreach ($category as $categoryname)
+                                                        <option value="{{ $categoryname->id }}">{{ $categoryname->name }}</option>
+                                                    @endforeach
+                                                @endif
+                                            </select>
 
-                                        <div class="col-md-6 mt-2">
-                                            <div class="date">
-                                                <input type="date" name="checkout" class="form-control"
-                                                    placeholder="Check Out" />
-                                            </div>
-                                            <small class="text-muted">Check-Out</small>
                                         </div>
                                     </div>
 
@@ -375,7 +370,7 @@
                     <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
                         <div class="rounded shadow overflow-hidden">
                             <div class="position-relative">
-                                <img class="img-fluid" src="{{ asset('frontend/img/team-1.jpg') }}" alt="">
+                                <img class="img-fluid" src="{{ asset('frontend/img/team-1.jpg') }}" alt="" id="click">
                             </div>
                             <div class="text-center p-4 mt-3">
                                 <h5 class="fw-bold mb-0">Daniel Carter</h5>
@@ -437,6 +432,14 @@
 
     </body>
 
+<script>
+    $(document).ready(function(){
+        $("#click").click(function(){
+            alert("ds");
+        });
+    });
+</script>
     </html>
+
 
 @endsection

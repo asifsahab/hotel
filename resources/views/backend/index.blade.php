@@ -29,7 +29,7 @@
                         <!-- small box -->
                         <div class="small-box bg-info">
                             <div class="inner">
-                                <h3>{{ $booking }}<sup style="font-size: 20px"></sup></h3>
+                                <h3>{{ $totalbooking }}<sup style="font-size: 20px"></sup></h3>
                                 <p>New Bookings</p>
                             </div>
                             <div class="icon">

@@ -19,8 +19,21 @@ class RoomController extends Controller
 
     public function search(Request $request)
     {
+        $request->validate([
+            'city' => 'required',
+        ]);
+
+
+        $category = $request->category;
         $city_id = $request->city;
-        $room = Room::where('city_id','=',$city_id)->get();
+        if($category){
+            $room = Room::where('city_id',$city_id)->where('category_id',$category)->get();
+        }
+        else
+        {
+            $room = Room::where('city_id',$city_id)->get();
+
+        }
        return view('frontend.room')->with('room',$room);
     }
 

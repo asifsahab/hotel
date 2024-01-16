@@ -120,7 +120,7 @@
                                                 <input type="date" name="checkin"
                                                     class="form-control datetimepicker-input" id="checkin"
                                                     placeholder="Check In" />
-                                                <label for="checkin">Check-In</label>
+                                                <label for="checkin">Check-In {{ $room->checkin }}</label>
                                                 @error('checkin')
                                                     <span class="text-danger">{{ $message }}</span>
                                                 @enderror
@@ -131,7 +131,7 @@
                                                 <input type="date" name="checkout"
                                                     class="form-control datetimepicker-input" id="checkout"
                                                     placeholder="Check Out" />
-                                                <label for="checkout">Check-out</label>
+                                                <label for="checkout">Check-out {{ $room->checkout }}</label>
                                                 @error('checkout')
                                                     <span class="text-danger">{{ $message }}</span>
                                                 @enderror

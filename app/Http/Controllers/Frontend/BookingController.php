@@ -6,18 +6,19 @@ use App\Http\Controllers\Controller;
 use App\Models\Booking;
 use App\Models\Room;
 use Illuminate\Http\Request;
+use PHPMailer\PHPMailer\PHPMailer;
 
 class BookingController extends Controller
 {
     public function bookingsubmit(Request $request)
     {
         $hotelname = Room::where('hotelname', $request->hotelname)->first();
-
         if (!$hotelname) {
             return redirect()->back()->with('error', 'Room not found');
         }
 
         $checkin = new \DateTime($hotelname->checkin);
+
         $checkout = new \DateTime($hotelname->checkout);
 
         $totalDays = $checkin->diff($checkout)->days;
@@ -65,10 +66,47 @@ class BookingController extends Controller
 
         $bookingData->save();
 
+
+            $name = $request->name;
+            $email = $request->email;
+
+        $mail = new PHPMailer(true);
+
+        //Server settings
+        $mail->isSMTP();
+        $mail->Host = 'smtp.gmail.com'; // Replace with your SMTP server
+        $mail->SMTPAuth = true;
+        $mail->Username = 'asif.sahab64@gmail.com'; // Replace with your SMTP username
+        $mail->Password = 'onfuucjugfpyrlso'; // Replace with your SMTP password
+        $mail->SMTPSecure = 'tls';
+        $mail->Port = 587;
+
+        //Recipients
+        $mail->setFrom('asif.sahab64@gmail.com', 'Hotelier');
+        $mail->addAddress($email); // Replace with the recipient's email address
+
+        //Content
+        $mail->isHTML(true);
+
+        $mail->Subject = 'Booking Confirmation - ' . $name;
+
+      // Construct an HTML email body with Bootstrap styling
+$mail->Body .= '<div class="container">';
+$mail->Body .= '<div class="jumbotron">';
+$mail->Body .= '<h1 class="display-4">Your Booking Confirmed!</h1>';
+$mail->Body .= '<p class="lead">Thank you for booking with us.</p>';
+$mail->Body .= '<hr class="my-4">';
+$mail->Body .= '<p><strong>Name:</strong> ' . $name . '</p>';
+$mail->Body .= '<p><strong>Email:</strong> ' . $email . '</p>';
+$mail->Body .= '<p class="lead">Company: Hotilier</p>'; // Replace "Your Company Name" with the actual company name
+$mail->Body .= '</div>';
+$mail->Body .= '</div>';
+
+        $mail->send();
+
         if ($userTotalDays == $totalDays) {
 
             $hotelname->status = 0;
-
             $hotelname->save();
         } else {
             $hotelname->checkin = $userCheckout->modify('+1 day')->format('Y-m-d');

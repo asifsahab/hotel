@@ -53,7 +53,7 @@
                                             href="mailto:asif.sahab64@gmail.com">asif.sahab64@gmail.com</p></a>
                                 </div>
                                 <div class="col-md-4">
-                                    <h6 class="section-title text-start text-primary text-uppercase">General</h6>
+                                    <h6 class="section-title text-start text-primary text-uppercase" >General</h6>
                                     <p><i class="fa fa-envelope-open text-primary me-2"></i><a
                                             href="mailto:asif.sahab64@gmail.com">asif.sahab64@gmail.com</p></a>
                                 </div>
@@ -77,7 +77,7 @@
                                     <div class="row g-3">
                                         <div class="col-md-6">
                                             <div class="form-floating">
-                                                <input type="text" name="name" value="{{ old('name') }}"
+                                                <input type="text" id="name" name="name" value="{{ old('name') }}"
                                                     class="form-control" id="name" placeholder="Your Name">
                                                 <label for="name">Your Name</label>
                                                 @error('name')

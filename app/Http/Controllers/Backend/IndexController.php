@@ -19,11 +19,13 @@ class IndexController extends Controller
         $booking = Booking::count();
         $today = Carbon::today();
         $totalcontact = Contact::whereDate('created_at', $today)->count();
+        $totalbooking = Booking::whereDate('created_at', $today)->count();
         $contactdata = Contact::all();
         return view('backend.index')
         ->with('room',$room)
         ->with('totalcontact',$totalcontact)
         ->with('contactdata',$contactdata)
+        ->with('totalbooking',$totalbooking)
         ->with('city',$city)
         ->with('booking',$booking);
     }

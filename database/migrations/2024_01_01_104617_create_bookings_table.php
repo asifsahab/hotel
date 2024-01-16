@@ -21,7 +21,7 @@ return new class extends Migration
             $table->integer('price');
             $table->integer('room');
             $table->integer('person');
-            $table->string('request');
+            $table->string('request')->nullable();
             $table->date('checkin');
             $table->date('checkout');
             $table->timestamps();

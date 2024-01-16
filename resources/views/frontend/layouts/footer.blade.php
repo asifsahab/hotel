@@ -84,6 +84,7 @@
 <script src="{{ asset('frontend/lib/tempusdominus/js/moment-timezone.min.js') }}"></script>
 <script src="{{ asset('frontend/lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js') }}"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
 
 
 <!-- Template Javascript -->
@@ -116,7 +117,15 @@
     function hasCookieConsent() {
         return localStorage.getItem('cookieConsent') === 'true' || localStorage.getItem('cookieConsent') === 'false';
     }
+
+
+
+    $(document).ready(function(){
+        
+    });
+
 </script>
+
 
 
 

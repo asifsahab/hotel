@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use App\Models\City;
 use App\Models\Room;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -13,13 +14,15 @@ class HomeController extends Controller
     {
 
         $city = City::all();
+        $category = Category::all();
         $room = Room::latest()->take(3)->get();
         $totalroom = Room::count();
 
         return view('frontend.index')
             ->with('city', $city)
             ->with('totalroom', $totalroom)
-            ->with('room', $room);
+            ->with('room', $room)
+            ->with('category', $category);
 
     }
 
@@ -36,6 +39,7 @@ class HomeController extends Controller
     }
     public function roombooking(Request $request, $hotelname)
     {
+        $hotelname = str_replace("-", " ", $hotelname);
         $hotelname2 = $hotelname;
         $room = Room::where('hotelname', $hotelname2)->first();
 
